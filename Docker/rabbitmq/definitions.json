@@ -1,0 +1,184 @@
+{
+    "rabbit_version": "3.7.1",
+    "users": [
+        {
+            "name": "guest",
+            "password_hash": "xtqAiq4cOvVDoJ06hXES22b/aDljrti/Xog7S8s4Vjtf49Vl",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "guest",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "topic_permissions": [],
+    "parameters": [],
+    "global_parameters": [
+        {
+            "name": "cluster_name",
+            "value": "rabbit@DESKTOP-813A9DK"
+        }
+    ],
+    "policies": [],
+    "queues": [
+        {
+            "name": "message_media_doc",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_audio_dead",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_video",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_doc_dead",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_dead",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "analyse_channel",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_audio",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "message_media_video_dead",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "telegramtools",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "analyse_channel",
+            "destination_type": "queue",
+            "routing_key": "analyse_channel",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media",
+            "destination_type": "queue",
+            "routing_key": "message_media",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_audio",
+            "destination_type": "queue",
+            "routing_key": "message_media_audio",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_audio_dead",
+            "destination_type": "queue",
+            "routing_key": "message_media_audio_dead",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_dead",
+            "destination_type": "queue",
+            "routing_key": "message_media_dead",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_doc",
+            "destination_type": "queue",
+            "routing_key": "message_media_doc",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_doc_dead",
+            "destination_type": "queue",
+            "routing_key": "message_media_doc_dead",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_video",
+            "destination_type": "queue",
+            "routing_key": "message_media_video",
+            "arguments": {}
+        },
+        {
+            "source": "telegramtools",
+            "vhost": "/",
+            "destination": "message_media_video_dead",
+            "destination_type": "queue",
+            "routing_key": "message_media_video_dead",
+            "arguments": {}
+        }
+    ]
+}
