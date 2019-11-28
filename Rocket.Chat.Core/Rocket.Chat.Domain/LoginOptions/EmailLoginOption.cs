@@ -1,7 +1,7 @@
-﻿namespace Rocket.Chat.Domain.LoginOptions
-{
-    using Rocket.Chat.Net.Interfaces;
-    
+﻿using Rocket.Chat.Domain.Interfaces;
+
+namespace Rocket.Chat.Domain.LoginOptions
+{   
     public class EmailLoginOption : ILoginOption
     {
         /// <summary>

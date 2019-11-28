@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using JetBrains.Annotations;
-
     using Newtonsoft.Json;
 
     using Rocket.Chat.Domain.JsonConverters;
@@ -39,7 +37,6 @@
         /// <summary>
         /// Room the message was recieved in.
         /// </summary>
-        [JsonIgnore, CanBeNull]
         public RoomWithInfo Room { get; set; }
 
         /// <summary>

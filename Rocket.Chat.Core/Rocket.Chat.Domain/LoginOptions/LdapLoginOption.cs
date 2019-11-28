@@ -1,9 +1,8 @@
-﻿namespace Rocket.Chat.Domain.LoginOptions
+﻿using Rocket.Chat.Domain.Interfaces;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Rocket.Chat.Domain.LoginOptions
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    using Rocket.Chat.Net.Interfaces;
-
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class LdapLoginOption : ILoginOption
     {
