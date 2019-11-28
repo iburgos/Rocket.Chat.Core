@@ -3,6 +3,7 @@ using RestSharp;
 using Rocket.Chat.Api.Core.Services;
 using Serilog;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Rocket.Chat.Api.Core.RestHelpers
@@ -51,7 +52,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "Post call to API threw an exception");
-                throw;
+                return new ApiResponse<TResult>(ex.Message, ex.StackTrace);
             }
         }
 
@@ -72,7 +73,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "Get call to API threw an exception");
-                throw;
+                return new ApiResponse<TResult>(ex.Message, ex.StackTrace);
             }
         }
 
@@ -93,7 +94,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "Put call to API threw an exception");
-                throw;
+                return new ApiResponse<TResult>(ex.Message, ex.StackTrace);
             }
         }
 
@@ -114,7 +115,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "Delete call to API threw an exception");
-                throw;
+                return new ApiResponse<TResult>(ex.Message, ex.StackTrace);
             }
         }
 
@@ -135,7 +136,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "GetFile GET call to API threw an exception");
-                throw;
+                return new ApiResponse<byte[]>(ex.Message, ex.StackTrace);
             }
         }
 
@@ -154,7 +155,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             catch (Exception ex)
             {
                 Logger.Error(ex, "GetFile POST call to API threw an exception");
-                throw;
+                return new ApiResponse<byte[]>(ex.Message, ex.StackTrace);
             }
         }
 

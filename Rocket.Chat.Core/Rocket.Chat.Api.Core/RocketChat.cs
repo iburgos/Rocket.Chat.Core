@@ -17,6 +17,7 @@ namespace Rocket.Chat.Api.Core
             container.Register<IJsonConvertHelper, JsonConvertHelper>();
             container.Register<IRestClientService, RestClientService>();
             container.Register<ILoginService, LoginService>();
+            container.Register<IChannelsService, ChannelsService>();
             container.Register<IRocketChatApi, RocketChatApi>();
             container.Register<IAuthService, AuthService>();
 

@@ -17,6 +17,11 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             : base(statusCode, responseStatus)
         {
         }
+
+        public ApiResponse(string message, string stackTrace)
+            : base(message, stackTrace)
+        {
+        }
     }
 
     public class ApiResponse
@@ -37,6 +42,13 @@ namespace Rocket.Chat.Api.Core.RestHelpers
         {
             StatusCode = statusCode;
             ResponseStatus = responseStatus;
+        }
+
+        public ApiResponse(string message, string stackTrace)
+        {
+            ResponseStatus = ResponseStatus.Error;
+            Message = message;
+            StackTrace = stackTrace;
         }
     }
 }
