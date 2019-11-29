@@ -8,6 +8,7 @@ namespace Rocket.Chat.Api.Core.Services
 {
     public interface IChannelsService
     {
+        Task<Result<Channels>> List();
         Task<Result<Channels>> ListJoined();
         Task<Result<Messages>> Messages(string roomId);
         Task<Result<Messages>> History(string roomId);
@@ -20,6 +21,20 @@ namespace Rocket.Chat.Api.Core.Services
         public ChannelsService(IRestClientService restClientService)
         {
             _restClientService = restClientService;
+        }
+
+        public async Task<Result<Channels>> List()
+        {
+            var response = await _restClientService.Get<Channels>(GetUrl("list"));
+
+            Result<Channels> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = new Result<Channels>(response.Result);
+            else
+                loginResult = new Result<Channels>(response.Message);
+
+            return loginResult;
         }
 
         public async Task<Result<Channels>> ListJoined()

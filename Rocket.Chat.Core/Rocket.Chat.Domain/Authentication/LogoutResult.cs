@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Rocket.Chat.Domain.MethodResults.Login
+namespace Rocket.Chat.Domain.Authentication
 {
     public class LogoutResult
     {

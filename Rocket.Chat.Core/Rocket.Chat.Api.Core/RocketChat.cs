@@ -16,10 +16,11 @@ namespace Rocket.Chat.Api.Core
             container.Register<IRestClient>(() => new RestClient(serverUrl));
             container.Register<IJsonConvertHelper, JsonConvertHelper>();
             container.Register<IRestClientService, RestClientService>();
-            container.Register<ILoginService, LoginService>();
+            container.Register<IAuthenticationService, AuthenticationService>();
             container.Register<IChannelsService, ChannelsService>();
+            container.Register<IGroupsService, GroupsService>();
             container.Register<IRocketChatApi, RocketChatApi>();
-            container.Register<IAuthService, AuthService>();
+            container.Register<IAuthHelper, AuthHelper>();
 
             var options = new MemoryCacheOptions
             {

@@ -18,11 +18,11 @@ namespace Rocket.Chat.Api.Core
     public class RocketChatApi : IRocketChatApi
     {
         private readonly IChannelsService _channelsService;
-        private readonly ILoginService _loginService;
+        private readonly IAuthenticationService _loginService;
 
         public RocketChatApi(
             IChannelsService channelsService,
-            ILoginService loginService)
+            IAuthenticationService loginService)
         {
             _channelsService = channelsService;
             _loginService = loginService;

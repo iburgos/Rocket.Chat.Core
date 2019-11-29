@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Rocket.Chat.Domain.MethodResults
+namespace Rocket.Chat.Domain.Authentication
 {
     public class LoginResult
     {

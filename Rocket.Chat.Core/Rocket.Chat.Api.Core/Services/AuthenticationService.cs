@@ -1,25 +1,24 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Rocket.Chat.Api.Core.RestHelpers;
-using Rocket.Chat.Domain.MethodResults;
-using Rocket.Chat.Domain.MethodResults.Login;
+using Rocket.Chat.Domain.Authentication;
 using Rocket.Chat.Domain.Requests;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Rocket.Chat.Api.Core.Services
 {
-    public interface ILoginService
+    public interface IAuthenticationService
     {
         Task<Result<LoginResult>> Login(string user, string password);
         Task<Result<LogoutResult>> Logout();
     }
 
-    internal class LoginService: ILoginService
+    internal class AuthenticationService: IAuthenticationService
     {
         private readonly IMemoryCache _memoryCache;
         private readonly IRestClientService _restClientService;
 
-        public LoginService(
+        public AuthenticationService(
             IMemoryCache memoryCache,
             IRestClientService restClientService)
         {

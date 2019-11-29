@@ -21,12 +21,12 @@ namespace Rocket.Chat.Api.Core.RestHelpers
     public class RestClientService : IRestClientService
     {
         public ILogger Logger = Log.Logger;
-        private readonly IAuthService _authService;
+        private readonly IAuthHelper _authService;
         private readonly IRestClient _restClient;
         private readonly IJsonConvertHelper _jsonConvertHelper;
 
         public RestClientService(
-            IAuthService authService,
+            IAuthHelper authService,
             IRestClient restClient,
             IJsonConvertHelper jsonConvertHelper)
         {
@@ -118,8 +118,6 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 return new ApiResponse<TResult>(ex.Message, ex.StackTrace);
             }
         }
-
-        
 
         public async Task<ApiResponse<byte[]>> GetFile(string route)
         {

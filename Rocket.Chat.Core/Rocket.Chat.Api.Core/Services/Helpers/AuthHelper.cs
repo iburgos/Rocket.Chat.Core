@@ -2,14 +2,14 @@
 
 namespace Rocket.Chat.Api.Core.Services
 {
-    public interface IAuthService
+    public interface IAuthHelper
     {
         bool IsAuthorized { get; }
         string UserId { get; }
         string AuthToken { get; }
     }
 
-    public class AuthService: IAuthService
+    public class AuthHelper: IAuthHelper
     {
         public bool IsAuthorized { get { return _isAuthorized;  } }
         public string UserId { get { return _userId; } }
@@ -17,7 +17,7 @@ namespace Rocket.Chat.Api.Core.Services
 
         private readonly IMemoryCache _memoryCache;
 
-        public AuthService(IMemoryCache memoryCache)
+        public AuthHelper(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
         }
