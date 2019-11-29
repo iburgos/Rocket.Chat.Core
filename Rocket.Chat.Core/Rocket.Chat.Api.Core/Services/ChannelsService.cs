@@ -15,6 +15,8 @@ namespace Rocket.Chat.Api.Core.Services
 
     public class ChannelsService: IChannelsService
     {
+        private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"channels.{endPoint}");
+
         private readonly IRestClientService _restClientService;
 
         public ChannelsService(IRestClientService restClientService)
@@ -79,7 +81,5 @@ namespace Rocket.Chat.Api.Core.Services
 
             return loginResult;
         }
-
-        private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"channels.{endPoint}");
     }
 }

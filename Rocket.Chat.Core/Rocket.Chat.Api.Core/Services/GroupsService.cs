@@ -47,6 +47,8 @@ namespace Rocket.Chat.Api.Core.Services
 
     public class GroupsService : IGroupsService
     {
+        private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"groups.{endPoint}");
+
         private readonly IRestClientService _restClientService;
 
         public GroupsService(IRestClientService restClientService)
@@ -118,7 +120,5 @@ namespace Rocket.Chat.Api.Core.Services
         public void SetTopic() => throw new NotImplementedException();
         public void SetType() => throw new NotImplementedException();
         public void Unarchive() => throw new NotImplementedException();
-
-        private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"groups.{endPoint}");
     }
 }
