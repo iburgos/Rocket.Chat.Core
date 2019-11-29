@@ -2,6 +2,7 @@
 using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Domain.Authentication;
 using Rocket.Chat.Domain.Requests;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,7 +11,11 @@ namespace Rocket.Chat.Api.Core.Services
     public interface IAuthenticationService
     {
         Task<Result<LoginResult>> Login(string user, string password);
+        void LoginGoogle();
+        void LoginFacebook();
+        void LoginTwitter();
         Task<Result<LogoutResult>> Logout();
+        void Me();
     }
 
     internal class AuthenticationService: IAuthenticationService
@@ -52,6 +57,21 @@ namespace Rocket.Chat.Api.Core.Services
             return loginResult;
         }
 
+        public void LoginGoogle()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoginFacebook()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoginTwitter()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Result<LogoutResult>> Logout()
         {
             ApiResponse<LogoutResult> response = await _restClientService.Post<LogoutResult>(ApiHelper.GetUrl("logout"), null);
@@ -69,6 +89,11 @@ namespace Rocket.Chat.Api.Core.Services
                 logoutResult = new Result<LogoutResult>(response.Message);
 
             return logoutResult;
+        }
+
+        public void Me()
+        {
+            throw new NotImplementedException();
         }
     }
 }

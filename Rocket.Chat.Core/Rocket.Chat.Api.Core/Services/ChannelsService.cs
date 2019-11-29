@@ -1,6 +1,5 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Domain;
-using Rocket.Chat.Domain.MethodResults;
 using System.Net;
 using System.Threading.Tasks;
 
