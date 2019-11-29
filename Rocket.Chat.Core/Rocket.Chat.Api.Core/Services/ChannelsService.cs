@@ -1,5 +1,8 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Domain;
+using Rocket.Chat.Domain.MethodResults;
+using Rocket.Chat.Domain.MethodResults.Channels;
+using Rocket.Chat.Domain.Payloads.Channels;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,43 +11,165 @@ namespace Rocket.Chat.Api.Core.Services
 {
     public interface IChannelsService
     {
-        void AddAll();
-        void AddLeader();
+        /// <summary>
+        /// Adds all of the users on the server to a channel.
+        /// </summary>
+        Task<Result<ChannelResult>> AddAll(string roomId, bool activeUsersOnly = false);
+        /// <summary>
+        /// Gives the role of Leader for a user in the current channel.
+        /// </summary>
+        Task<Result<bool>> AddLeader(string roomId, string userId);
+        /// <summary>
+        /// Gives the role of moderator for a user in the current channel.
+        /// </summary>
+        Task<Result<bool>> AddModerator(string roomId, string userId);
+        /// <summary>
+        /// Gives the role of owner for a user in the current channel.
+        /// </summary>
+        Task<Result<bool>> AddOwner(string roomId, string userId);
+        /// <summary>
+        /// Gets the messages in public channels to an anonymous user
+        /// </summary>
         void Anonymousread();
+        /// <summary>
+        /// Archives a channel.
+        /// </summary>
         void Archive();
+        /// <summary>
+        /// Cleans up a channel’s history, requires special permission.
+        /// </summary>
         void CleanHistory();
+        /// <summary>
+        /// Removes a channel from a user’s list of channels.
+        /// </summary>
         void Close();
+        /// <summary>
+        /// Gets channel counters.
+        /// </summary>
         void Counters();
+        /// <summary>
+        /// Creates a new channel.
+        /// </summary>
         void Create();
+        /// <summary>
+        /// Removes a channel.
+        /// </summary>
         void Delete();
+        /// <summary>
+        /// Gets a list of files from a channel.
+        /// </summary>
         void Files();
+        /// <summary>
+        /// Gets all the mentions of a channel.
+        /// </summary>
         void GetAllUserMentionsByChannel();
+        /// <summary>
+        /// Gets the channel’s integration.
+        /// </summary>
         void GetIntegrations();
+        /// <summary>
+        /// Retrieves the messages from a channel.
+        /// </summary>
         Task<Result<Messages>> History(string roomId);
+        /// <summary>
+        /// Gets a channel’s information.
+        /// </summary>
         void Info();
+        /// <summary>
+        /// Adds a user to a channel.
+        /// </summary>
         void Invite();
+        /// <summary>
+        /// Joins yourself to a channel.
+        /// </summary>
         void Join();
+        /// <summary>
+        /// Removes a user from a channel.
+        /// </summary>
         void Kick();
+        /// <summary>
+        /// Removes the calling user from a channel.
+        /// </summary>
         void Leave();
+        /// <summary>
+        /// Retrieves all of the channels from the server.
+        /// </summary>
         Task<Result<Channels>> List();
+        /// <summary>
+        /// Gets only the channels the calling user has joined.
+        /// </summary>
         Task<Result<Channels>> ListJoined();
+        /// <summary>
+        /// Retrieves all channel users.
+        /// </summary>
         void Members();
+        /// <summary>
+        /// Retrieves all channel messages.
+        /// </summary>
         Task<Result<Messages>> Messages(string roomId);
+        /// <summary>
+        /// 
+        /// </summary>
         void Moderators();
+        /// <summary>
+        /// List all moderators of a channel.
+        /// </summary>
         void Online();
+        /// <summary>
+        /// Adds the channel back to the user’s list of channels.
+        /// </summary>
         void Open();
+        /// <summary>
+        /// Removes the role of Leader for a user in the current channel.
+        /// </summary>
         void Removeleader();
+        /// <summary>
+        /// Changes a channel’s name.
+        /// </summary>
         void Rename();
+        /// <summary>
+        /// Gets the user’s roles in the channel.
+        /// </summary>
         void Roles();
+        /// <summary>
+        /// Sets a channel’s custom fields.
+        /// </summary>
         void SetCustomFields();
+        /// <summary>
+        /// Sets a channel’s announcement.
+        /// </summary>
         void SetAnnouncement();
+        /// <summary>
+        /// Sets whether a channel is a default channel or not.
+        /// </summary>
         void SetDefault();
+        /// <summary>
+        /// Sets a channel’s description.
+        /// </summary>
         void SetDescription();
+        /// <summary>
+        /// Sets the channel’s code required to join it.
+        /// </summary>
         void SetJoinCode();
+        /// <summary>
+        /// Sets a channel’s description.
+        /// </summary>
         void SetPurpose();
+        /// <summary>
+        /// Sets whether a channel is read only or not.
+        /// </summary>
         void SetReadOnly();
+        /// <summary>
+        /// Sets a channel’s topic.
+        /// </summary>
         void SetTopic();
+        /// <summary>
+        /// Sets the type of room the channel should be.
+        /// </summary>
         void SetType();
+        /// <summary>
+        /// Unarchives a channel.
+        /// </summary>
         void Unarchive();
     }
 
@@ -59,9 +184,63 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public void AddAll() => throw new NotImplementedException();
-        public void AddLeader() => throw new NotImplementedException();
-        public void Anonymousread() => throw new NotImplementedException();
+        public async Task<Result<ChannelResult>> AddAll(string roomId, bool activeUsersOnly = false)
+        {
+            var payload = new ChannelsPayload.AddAll
+            {
+                roomId = roomId,
+                activeUsersOnly = activeUsersOnly
+            };
+
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("addAll"), payload);
+
+            Result<ChannelResult> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = new Result<ChannelResult>(response.Result);
+            else
+                loginResult = new Result<ChannelResult>(response.Message);
+
+            return loginResult;
+        }
+
+        public async Task<Result<bool>> AddLeader(string roomId, string userId)
+        {
+            var payload = new ChannelsPayload.AddUserRole { roomId = roomId, userId = userId };
+            return await ProcessBooleanRequest(GetUrl("addLeader"), payload);
+        }
+
+        public async Task<Result<bool>> AddModerator(string roomId, string userId)
+        {
+            var payload = new ChannelsPayload.AddUserRole { roomId = roomId, userId = userId };
+            return await ProcessBooleanRequest(GetUrl("addModerator"), payload);
+        }
+
+        public async Task<Result<bool>> AddOwner(string roomId, string userId)
+        {
+            var payload = new ChannelsPayload.AddUserRole { roomId = roomId, userId = userId };
+            return await ProcessBooleanRequest(GetUrl("addOwner"), payload);
+        }
+
+        public async Task<Result<Messages>> AnonymousRead(string roomId = "", string roomName = "")
+        {
+            string route = GetUrl("anonymousread");
+            if (!string.IsNullOrEmpty(roomId))
+                route += $"?roomId={roomId}";
+            else if (!string.IsNullOrEmpty(roomName) && !route.Contains("roomId"))
+                route += $"?roomName={roomName}";
+
+            var response = await _restClientService.Get<Messages>(route);
+
+            Result<Messages> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = new Result<Messages>(response.Result);
+            else
+                loginResult = new Result<Messages>(response.Message);
+
+            return loginResult;
+        }
         public void Archive() => throw new NotImplementedException();
         public void CleanHistory() => throw new NotImplementedException();
         public void Close() => throw new NotImplementedException();
@@ -154,5 +333,19 @@ namespace Rocket.Chat.Api.Core.Services
         public void SetTopic() => throw new NotImplementedException();
         public void SetType() => throw new NotImplementedException();
         public void Unarchive() => throw new NotImplementedException();
+
+        private async Task<Result<bool>> ProcessBooleanRequest(string url, object payload)
+        {
+            var response = await _restClientService.Post<CallResult>(url, payload);
+
+            Result<bool> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = response.Result.Success ? new Result<bool>(true) : new Result<bool>(response.Result.Error);
+            else
+                loginResult = new Result<bool>(response.Message);
+
+            return loginResult;
+        }
     }
 }

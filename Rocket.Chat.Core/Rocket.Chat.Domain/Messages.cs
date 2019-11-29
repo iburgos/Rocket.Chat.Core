@@ -2,8 +2,6 @@
 
 using Newtonsoft.Json;
 
-using Rocket.Chat.Domain.JsonConverters;
-
 namespace Rocket.Chat.Domain
 {
     public class Messages

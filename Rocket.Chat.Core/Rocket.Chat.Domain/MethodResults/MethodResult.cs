@@ -4,9 +4,6 @@
 
     using Newtonsoft.Json;
 
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class MethodResult<T>
     {
         [JsonProperty(PropertyName = "msg")]
@@ -22,16 +19,15 @@
         public bool HasError => Error != null;
     }
 
-    public class MethodResult
+    public class CallResult
     {
-        [JsonProperty(PropertyName = "msg")]
-        public string ResponseType { get; set; }
-
-        public string Id { get; set; }
+        [JsonProperty(PropertyName = "success")]
+        public bool Success { get; set; }
 
         [JsonProperty(PropertyName = "error")]
-        public ErrorResult Error { get; set; }
+        public string Error { get; set; }
 
-        public bool HasError => Error != null;
+        [JsonProperty(PropertyName = "errorType")]
+        public string ErrorType { get; set; }
     }
 }
