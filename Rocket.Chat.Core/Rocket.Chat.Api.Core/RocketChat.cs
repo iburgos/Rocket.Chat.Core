@@ -20,6 +20,7 @@ namespace Rocket.Chat.Api.Core
             container.Register<IChannelsService, ChannelsService>();
             container.Register<IGroupsService, GroupsService>();
             container.Register<IUsersService, UsersService>();
+            container.Register<IChatService, ChatService>();
             container.Register<IRocketChatApi, RocketChatApi>();
             container.Register<IAuthHelper, AuthHelper>();
 
