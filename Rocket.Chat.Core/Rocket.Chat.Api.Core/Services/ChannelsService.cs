@@ -1,4 +1,5 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
+using Rocket.Chat.Domain;
 using Rocket.Chat.Domain.MethodResults;
 using System.Net;
 using System.Threading.Tasks;
@@ -7,7 +8,9 @@ namespace Rocket.Chat.Api.Core.Services
 {
     public interface IChannelsService
     {
-        Task<Result<ChannelsResult>> ListJoined();
+        Task<Result<Channels>> ListJoined();
+        Task<Result<Messages>> Messages(string roomId);
+        Task<Result<Messages>> History(string roomId);
     }
 
     public class ChannelsService: IChannelsService
@@ -19,18 +22,50 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public async Task<Result<ChannelsResult>> ListJoined()
+        public async Task<Result<Channels>> ListJoined()
         {
-            var response = await _restClientService.Get<ChannelsResult>(ApiHelper.GetUrl("channels.list.joined"));
+            var response = await _restClientService.Get<Channels>(GetUrl("list.joined"));
 
-            Result<ChannelsResult> loginResult;
+            Result<Channels> loginResult;
 
             if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<ChannelsResult>(response.Result);
+                loginResult = new Result<Channels>(response.Result);
             else
-                loginResult = new Result<ChannelsResult>(response.Message);
+                loginResult = new Result<Channels>(response.Message);
 
             return loginResult;
         }
+
+        public async Task<Result<Messages>> Messages(string roomId)
+        {
+            string route = $"{GetUrl("messages")}?roomId={roomId}";
+            var response = await _restClientService.Get<Messages>(route);
+
+            Result<Messages> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = new Result<Messages>(response.Result);
+            else
+                loginResult = new Result<Messages>(response.Message);
+
+            return loginResult;
+        }
+
+        public async Task<Result<Messages>> History(string roomId)
+        {
+            string route = $"{GetUrl("history")}?roomId={roomId}";
+            var response = await _restClientService.Get<Messages>(route);
+
+            Result<Messages> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = new Result<Messages>(response.Result);
+            else
+                loginResult = new Result<Messages>(response.Message);
+
+            return loginResult;
+        }
+
+        private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"channels.{endPoint}");
     }
 }

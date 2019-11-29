@@ -1,18 +1,8 @@
-﻿namespace Rocket.Chat.Domain.MethodResults
+﻿namespace Rocket.Chat.Domain
 {
     using System;
-    using System.Collections.Generic;
 
     using Newtonsoft.Json;
-
-    public class ChannelsResult
-    {
-        [JsonProperty(PropertyName = "success")]
-        public bool Success { get; set; }
-
-        [JsonProperty(PropertyName = "channels")]
-        public List<Channel> Channels { get; set; }
-    }
 
     public class Channel
     {
@@ -38,10 +28,10 @@
         public DateTime TimeStamp { get; set; }
 
         [JsonProperty(PropertyName = "ro")]
-        public string ro { get; set; }
+        public bool ro { get; set; }
 
         [JsonProperty(PropertyName = "sysMes")]
-        public string sysMes { get; set; }
+        public bool sysMes { get; set; }
 
         [JsonProperty(PropertyName = "_updatedAt")]
         public DateTime UpdatedAt { get; set; }

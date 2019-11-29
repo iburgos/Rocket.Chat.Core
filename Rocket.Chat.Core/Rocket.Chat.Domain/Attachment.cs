@@ -38,8 +38,8 @@ namespace Rocket.Chat.Domain
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }
 
-        [JsonProperty(PropertyName = "ts"), JsonConverter(typeof(MeteorDateConverter))]
-        public DateTime? Timestamp { get; set; }
+        [JsonProperty(PropertyName = "ts")]
+        public DateTime Timestamp { get; set; }
 
         protected bool Equals(Attachment other)
         {

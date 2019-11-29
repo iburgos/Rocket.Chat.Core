@@ -1,4 +1,5 @@
 ﻿using Rocket.Chat.Api.Core.Services;
+using Rocket.Chat.Domain;
 using Rocket.Chat.Domain.MethodResults;
 using Rocket.Chat.Domain.MethodResults.Login;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ namespace Rocket.Chat.Api.Core
     {
         Task<Result<LoginResult>> Login(string user, string password);
         Task<Result<LogoutResult>> Logout();
-        Task<Result<ChannelsResult>> ListJoined();
+        Task<Result<Channels>> ListJoined();
+        Task<Result<Messages>> Messages(string roomId);
+        Task<Result<Messages>> History(string roomId);
     }
 
     public class RocketChatApi : IRocketChatApi
@@ -35,9 +38,19 @@ namespace Rocket.Chat.Api.Core
             return await _loginService.Logout();
         }
 
-        public async Task<Result<ChannelsResult>> ListJoined()
+        public async Task<Result<Channels>> ListJoined()
         {
             return await _channelsService.ListJoined();
+        }
+
+        public async Task<Result<Messages>> Messages(string roomId)
+        {
+            return await _channelsService.Messages(roomId);
+        }
+
+        public async Task<Result<Messages>> History(string roomId)
+        {
+            return await _channelsService.History(roomId);
         }
     }
 }
