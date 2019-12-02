@@ -18,7 +18,7 @@ namespace Rocket.Chat.Domain
         public string Type { get; set; }
 
         [JsonProperty(PropertyName = "rid")]
-        public string Rid { get; set; }
+        public string RoomId { get; set; }
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
