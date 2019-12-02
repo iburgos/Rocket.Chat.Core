@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Ignacio Burgos</Authors>
+    <Description>Rocket.Chat Api for .Net Core</Description>
+    <RepositoryUrl>https://github.com/iburgos/Rocket.Chat.Core</RepositoryUrl>
+    <PackageLicenseExpression />
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes>Testing</PackageReleaseNotes>
+    <Company />
   </PropertyGroup>
 
   <ItemGroup>
