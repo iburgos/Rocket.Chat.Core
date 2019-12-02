@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Rocket.Chat.Domain.Payloads
+namespace Rocket.Chat.Domain.Queries
 {
     public class Query
     {
@@ -40,52 +40,11 @@ namespace Rocket.Chat.Domain.Payloads
             if (Offset.HasValue)
                 queryParams.Add("offset", Offset.Value.ToString());
             if (Count.HasValue)
-                queryParams.Add("count", Offset.Value.ToString());
+                queryParams.Add("count", Count.Value.ToString());
             if (Sort != null)
                 queryParams.Add("sort", Sort.ToQueryString());
 
-            return DicToQuerystring(queryParams);
+            return QueryHelper.DicToQuerystring(queryParams);
         }
-
-        private string DicToQuerystring(Dictionary<string, string> queryParams)
-        {
-            string queryString = "?";
-            int count = 1;
-            foreach (KeyValuePair<string, string> item in queryParams)
-            {
-                queryString += $"{item.Key}={item.Value}";
-                if (count < queryParams.Count)
-                    queryString += "&";
-
-                count++;
-            }
-            return queryString;
-        }
-    }
-
-    public class Sort
-    {
-        public List<SortField> Fields { get; set; }
-
-        public string ToQueryString()
-        {
-            string sort = string.Empty;
-            for (int i = 0; i < Fields.Count; i++)
-            {
-                var field = Fields[i];
-                sort += field.ToQueryString();
-                if (i < Fields.Count - 1)
-                    sort += ",";
-            }
-            return $"{{{sort}}}";
-        }
-    }
-
-    public class SortField
-    {
-        public string Name { get; set; }
-        public int Direction { get; set; }
-
-        public string ToQueryString() => $"\"{Name.ToLower()}\":{Direction}";
     }
 }

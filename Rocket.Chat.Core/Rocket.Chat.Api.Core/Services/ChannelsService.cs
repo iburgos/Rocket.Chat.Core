@@ -1,9 +1,13 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
+using Rocket.Chat.Api.Core.Services.Helpers;
 using Rocket.Chat.Domain;
 using Rocket.Chat.Domain.MethodResults;
 using Rocket.Chat.Domain.MethodResults.Channels;
-using Rocket.Chat.Domain.Payloads.Channels;
+using Rocket.Chat.Domain.Payloads;
+using Rocket.Chat.Domain.Queries;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -14,7 +18,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Adds all of the users on the server to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> AddAll(string roomId, bool activeUsersOnly = false);
+        Task<Result<ChannelResult>> AddAll(ChannelsPayload.AddAll payload);
         /// <summary>
         /// Gives the role of Leader for a user in the current channel.
         /// </summary>
@@ -30,67 +34,63 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Gets the messages in public channels to an anonymous user
         /// </summary>
-        void Anonymousread();
+        Task<Result<Messages>> AnonymousRead(Query query);
         /// <summary>
         /// Archives a channel.
         /// </summary>
-        void Archive();
-        /// <summary>
-        /// Cleans up a channel’s history, requires special permission.
-        /// </summary>
-        void CleanHistory();
+        Task<Result<bool>> Archive(string roomId);
         /// <summary>
         /// Removes a channel from a user’s list of channels.
         /// </summary>
-        void Close();
+        Task<Result<bool>> Close(string roomId);
         /// <summary>
         /// Gets channel counters.
         /// </summary>
-        void Counters();
+        Task<Result<Counters>> Counters(ChannelQuery.Counters query);
         /// <summary>
         /// Creates a new channel.
         /// </summary>
-        void Create();
+        Task<Result<ChannelResult>> Create(ChannelsPayload.Create payload);
         /// <summary>
         /// Removes a channel.
         /// </summary>
-        void Delete();
+        Task<Result<bool>> Delete(string roomId);
         /// <summary>
         /// Gets a list of files from a channel.
         /// </summary>
-        void Files();
+        Task<Result<Files>> Files(ChannelQuery.Channel query);
         /// <summary>
         /// Gets all the mentions of a channel.
         /// </summary>
-        void GetAllUserMentionsByChannel();
+        Task<Result<Mentions>> GetAllUserMentionsByChannel(string roomId);
         /// <summary>
         /// Gets the channel’s integration.
         /// </summary>
-        void GetIntegrations();
+        Task<Result<Integrations>> GetIntegrations(string roomId);
         /// <summary>
         /// Retrieves the messages from a channel.
         /// </summary>
-        Task<Result<Messages>> History(string roomId);
+        Task<Result<Messages>> History(ChannelQuery.History query);
         /// <summary>
         /// Gets a channel’s information.
         /// </summary>
-        void Info();
+        Task<Result<ChannelResult>> Info(string roomId);
         /// <summary>
         /// Adds a user to a channel.
         /// </summary>
-        void Invite();
+        Task<Result<ChannelResult>> Invite(ChannelsPayload.Invite payload);
         /// <summary>
         /// Joins yourself to a channel.
         /// </summary>
-        void Join();
+        Task<Result<ChannelResult>> Join(ChannelsPayload.Join payload);
         /// <summary>
         /// Removes a user from a channel.
         /// </summary>
-        void Kick();
+        Task<Result<ChannelResult>> Kick(ChannelsPayload.Kick payload);
         /// <summary>
         /// Removes the calling user from a channel.
         /// </summary>
-        void Leave();
+        Task<Result<ChannelResult>> Leave(ChannelsPayload payload);
         /// <summary>
         /// Retrieves all of the channels from the server.
         /// </summary>
@@ -184,24 +184,10 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public async Task<Result<ChannelResult>> AddAll(string roomId, bool activeUsersOnly = false)
+        public async Task<Result<ChannelResult>> AddAll(ChannelsPayload.AddAll payload)
         {
-            var payload = new ChannelsPayload.AddAll
-            {
-                roomId = roomId,
-                activeUsersOnly = activeUsersOnly
-            };
-
             var response = await _restClientService.Post<ChannelResult>(GetUrl("addAll"), payload);
-
-            Result<ChannelResult> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<ChannelResult>(response.Result);
-            else
-                loginResult = new Result<ChannelResult>(response.Message);
-
-            return loginResult;
+            return ServiceHelper.MapResponse(response);
         }
 
         public async Task<Result<bool>> AddLeader(string roomId, string userId)
@@ -222,82 +208,105 @@ namespace Rocket.Chat.Api.Core.Services
             return await ProcessBooleanRequest(GetUrl("addOwner"), payload);
         }
 
-        public async Task<Result<Messages>> AnonymousRead(string roomId = "", string roomName = "")
+        public async Task<Result<Messages>> AnonymousRead(Query query)
         {
-            string route = GetUrl("anonymousread");
-            if (!string.IsNullOrEmpty(roomId))
-                route += $"?roomId={roomId}";
-            else if (!string.IsNullOrEmpty(roomName) && !route.Contains("roomId"))
-                route += $"?roomName={roomName}";
-
+            string route = $"{GetUrl("anonymousread")}{query.ToQueryString()}";
             var response = await _restClientService.Get<Messages>(route);
-
-            Result<Messages> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<Messages>(response.Result);
-            else
-                loginResult = new Result<Messages>(response.Message);
-
-            return loginResult;
-        }
-        public void Archive() => throw new NotImplementedException();
-        public void CleanHistory() => throw new NotImplementedException();
-        public void Close() => throw new NotImplementedException();
-        public void Counters() => throw new NotImplementedException();
-        public void Create() => throw new NotImplementedException();
-        public void Delete() => throw new NotImplementedException();
-        public void Files() => throw new NotImplementedException();
-        public void GetAllUserMentionsByChannel() => throw new NotImplementedException();
-        public void GetIntegrations() => throw new NotImplementedException();
-
-        public async Task<Result<Messages>> History(string roomId)
-        {
-            string route = $"{GetUrl("history")}?roomId={roomId}";
-            var response = await _restClientService.Get<Messages>(route);
-
-            Result<Messages> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<Messages>(response.Result);
-            else
-                loginResult = new Result<Messages>(response.Message);
-
-            return loginResult;
+            return ServiceHelper.MapResponse(response);
         }
 
-        public void Info() => throw new NotImplementedException();
-        public void Invite() => throw new NotImplementedException();
-        public void Join() => throw new NotImplementedException();
-        public void Kick() => throw new NotImplementedException();
-        public void Leave() => throw new NotImplementedException();
+        public async Task<Result<bool>> Archive(string roomId)
+        {
+            return await ProcessBooleanRequest(GetUrl("archive"), new ChannelsPayload { roomId = roomId });
+        }
+
+        public async Task<Result<bool>> Close(string roomId)
+        {
+            return await ProcessBooleanRequest(GetUrl("close"), new ChannelsPayload { roomId = roomId });
+        }
+
+        public async Task<Result<Counters>> Counters(ChannelQuery.Counters query)
+        {
+            string route = $"{GetUrl("counters")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Counters>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<ChannelResult>> Create(ChannelsPayload.Create payload)
+        {
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("create"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<bool>> Delete(string roomId)
+        {
+            return await ProcessBooleanRequest(GetUrl("delete"), new ChannelsPayload { roomId = roomId });
+        }
+
+        public async Task<Result<Files>> Files(ChannelQuery.Channel query)
+        {
+            string route = $"{GetUrl("files")}{query.ToQueryString()}";
+            return ServiceHelper.MapResponse(await _restClientService.Get<Files>(route));
+        }
+
+        public async Task<Result<Mentions>> GetAllUserMentionsByChannel(string roomId)
+        {
+            var query = new ChannelQuery.Channel { RoomId = roomId };
+            string route = $"{GetUrl("getAllUserMentionsByChannel")}{query.ToQueryString()}";
+            return ServiceHelper.MapResponse(await _restClientService.Get<Mentions>(route));
+        }
+
+        public async Task<Result<Integrations>> GetIntegrations(string roomId)
+        {
+            var query = new ChannelQuery.Channel { RoomId = roomId };
+            string route = $"{GetUrl("getIntegrations")}{query.ToQueryString()}";
+            return ServiceHelper.MapResponse(await _restClientService.Get<Integrations>(route));
+        }
+
+        public async Task<Result<Messages>> History(ChannelQuery.History query)
+        {
+            string route = $"{GetUrl("history")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<ChannelResult>> Info(string roomId)
+        {
+            var query = new ChannelQuery.Channel { RoomId = roomId };
+            string route = $"{GetUrl("info")}{query.ToQueryString()}";
+            return ServiceHelper.MapResponse(await _restClientService.Get<ChannelResult>(route));
+        }
+
+        public async Task<Result<ChannelResult>> Invite(ChannelsPayload.Invite payload)
+        {
+            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("invite"), payload));
+        }
+
+        public async Task<Result<ChannelResult>> Join(ChannelsPayload.Join payload)
+        {
+            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("join"), payload));
+        }
+
+        public async Task<Result<ChannelResult>> Kick(ChannelsPayload.Kick payload)
+        {
+            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("kick"), payload));
+        }
+
+        public async Task<Result<ChannelResult>> Leave(ChannelsPayload payload)
+        {
+            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("leave"), payload));
+        }
 
         public async Task<Result<Channels>> List()
         {
             var response = await _restClientService.Get<Channels>(GetUrl("list"));
-
-            Result<Channels> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<Channels>(response.Result);
-            else
-                loginResult = new Result<Channels>(response.Message);
-
-            return loginResult;
+            return ServiceHelper.MapResponse(response);
         }
 
         public async Task<Result<Channels>> ListJoined()
         {
             var response = await _restClientService.Get<Channels>(GetUrl("list.joined"));
-
-            Result<Channels> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<Channels>(response.Result);
-            else
-                loginResult = new Result<Channels>(response.Message);
-
-            return loginResult;
+            return ServiceHelper.MapResponse(response);
         }
 
         public void Members() => throw new NotImplementedException();
@@ -306,15 +315,7 @@ namespace Rocket.Chat.Api.Core.Services
         {
             string route = $"{GetUrl("messages")}?roomId={roomId}";
             var response = await _restClientService.Get<Messages>(route);
-
-            Result<Messages> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = new Result<Messages>(response.Result);
-            else
-                loginResult = new Result<Messages>(response.Message);
-
-            return loginResult;
+            return ServiceHelper.MapResponse(response);
         }
 
         public void Moderators() => throw new NotImplementedException();
