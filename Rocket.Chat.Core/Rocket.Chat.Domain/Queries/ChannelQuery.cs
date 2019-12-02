@@ -49,6 +49,28 @@ namespace Rocket.Chat.Domain.Queries
             }
         }
 
+        public class Members : ChannelQuery
+        {
+            public string RoomName { get; set; }
+            public int? Offset { get; set; }
+            public int? Count { get; set; }
+            public Sort Sort { get; set; }
+
+            public string ToQueryString()
+            {
+                var queryParams = GetByIdOrName(RoomId, RoomName);
+
+                if (Offset.HasValue)
+                    queryParams.Add("offset", Offset.Value.ToString());
+                if (Count.HasValue)
+                    queryParams.Add("count", Count.Value.ToString());
+                if (Sort != null)
+                    queryParams.Add("sort", Sort.ToQueryString());
+
+                return QueryHelper.DicToQuerystring(queryParams);
+            }
+        }
+
         public class Counters: ChannelQuery
         {
             public string RoomName { get; set; }

@@ -102,19 +102,19 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Retrieves all channel users.
         /// </summary>
-        void Members();
+        Task<Result<Members>> Members(ChannelQuery.Members query);
         /// <summary>
         /// Retrieves all channel messages.
         /// </summary>
         Task<Result<Messages>> Messages(string roomId);
         /// <summary>
-        /// 
-        /// </summary>
-        void Moderators();
-        /// <summary>
         /// List all moderators of a channel.
         /// </summary>
-        void Online();
+        Task<Result<Moderators>> Moderators(ChannelQuery.Channel query);
+        /// <summary>
+        /// List all online users of a channel.
+        /// </summary>
+        Task<Result<OnlineResult>> Online(ChannelQuery.Channel query);
         /// <summary>
         /// Adds the channel back to the user’s list of channels.
         /// </summary>
@@ -309,7 +309,12 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public void Members() => throw new NotImplementedException();
+        public async Task<Result<Members>> Members(ChannelQuery.Members query)
+        {
+            string route = $"{GetUrl("members")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Members>(route);
+            return ServiceHelper.MapResponse(response);
+        }
 
         public async Task<Result<Messages>> Messages(string roomId)
         {
@@ -318,8 +323,20 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public void Moderators() => throw new NotImplementedException();
-        public void Online() => throw new NotImplementedException();
+        public async Task<Result<Moderators>> Moderators(ChannelQuery.Channel query)
+        {
+            string route = $"{GetUrl("moderators")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Moderators>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<OnlineResult>> Online(ChannelQuery.Channel query)
+        {
+            string route = $"{GetUrl("online")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<OnlineResult>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
         public void Open() => throw new NotImplementedException();
         public void Removeleader() => throw new NotImplementedException();
         public void Rename() => throw new NotImplementedException();
