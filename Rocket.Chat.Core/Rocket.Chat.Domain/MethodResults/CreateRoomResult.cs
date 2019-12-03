@@ -1,7 +1,7 @@
-﻿namespace Rocket.Chat.Domain.MethodResults
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace Rocket.Chat.Domain.MethodResults
+{
     public class CreateRoomResult
     {
         [JsonProperty(PropertyName = "rid")]

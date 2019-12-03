@@ -1,9 +1,9 @@
-﻿namespace Rocket.Chat.Domain.MethodResults
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Newtonsoft.Json;
+
+namespace Rocket.Chat.Domain.MethodResults
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    using Newtonsoft.Json;
-
     public class MethodResult<T>
     {
         [JsonProperty(PropertyName = "msg")]

@@ -17,7 +17,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Adds all of the users on the server to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> AddAll(ChannelsPayload.AddAll payload);
+        Task<Result<ChannelResult>> AddAll(Payload.AddAll payload);
         /// <summary>
         /// Gives the role of Leader for a user in the current channel.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Creates a new channel.
         /// </summary>
-        Task<Result<ChannelResult>> Create(ChannelsPayload.Create payload);
+        Task<Result<ChannelResult>> Create(Payload.Create payload);
         /// <summary>
         /// Removes a channel.
         /// </summary>
@@ -77,19 +77,19 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Adds a user to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Invite(ChannelsPayload.UserAction payload);
+        Task<Result<ChannelResult>> Invite(Payload.UserAction payload);
         /// <summary>
         /// Joins yourself to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Join(ChannelsPayload.Join payload);
+        Task<Result<ChannelResult>> Join(Payload.Join payload);
         /// <summary>
         /// Removes a user from a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Kick(ChannelsPayload.UserAction payload);
+        Task<Result<ChannelResult>> Kick(Payload.UserAction payload);
         /// <summary>
         /// Removes the calling user from a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Leave(ChannelsPayload payload);
+        Task<Result<ChannelResult>> Leave(Payload payload);
         /// <summary>
         /// Retrieves all of the channels from the server.
         /// </summary>
@@ -121,11 +121,11 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Removes the role of Leader for a user in the current channel.
         /// </summary>
-        Task<Result<bool>> Removeleader(ChannelsPayload.UserAction payload);
+        Task<Result<bool>> Removeleader(Payload.UserAction payload);
         /// <summary>
         /// Changes a channel’s name.
         /// </summary>
-        Task<Result<ChannelResult>> Rename(ChannelsPayload.Rename payload);
+        Task<Result<ChannelResult>> Rename(Payload.Rename payload);
         /// <summary>
         /// Gets the user’s roles in the channel.
         /// </summary>
@@ -133,11 +133,11 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Sets a channel’s announcement.
         /// </summary>
-        Task<Result<AnnouncementResult>> SetAnnouncement(ChannelsPayload.SetAnnouncement payload);
+        Task<Result<AnnouncementResult>> SetAnnouncement(Payload.SetAnnouncement payload);
         /// <summary>
         /// Sets a channel’s custom fields.
         /// </summary>
-        Task<Result<ChannelResult>> SetCustomFields(ChannelsPayload.CustomFields payload);
+        Task<Result<ChannelResult>> SetCustomFields(Payload.CustomFields payload);
         /// <summary>
         /// Sets whether a channel is a default channel or not.
         /// </summary>
@@ -145,31 +145,31 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Sets a channel’s description.
         /// </summary>
-        Task<Result<ChannelResult>> SetDescription(ChannelsPayload.SetDescription payload);
+        Task<Result<ChannelResult>> SetDescription(Payload.SetDescription payload);
         /// <summary>
         /// Sets the channel’s code required to join it.
         /// </summary>
-        Task<Result<ChannelResult>> SetJoinCode(ChannelsPayload.SetJoinCode payload);
+        Task<Result<ChannelResult>> SetJoinCode(Payload.SetJoinCode payload);
         /// <summary>
         /// Sets a channel’s description.
         /// </summary>
-        Task<Result<ChannelResult>> SetPurpose(ChannelsPayload.SetPurpose payload);
+        Task<Result<ChannelResult>> SetPurpose(Payload.SetPurpose payload);
         /// <summary>
         /// Sets whether a channel is read only or not.
         /// </summary>
-        Task<Result<ChannelResult>> SetReadOnly(ChannelsPayload.SetReadOnly payload);
+        Task<Result<ChannelResult>> SetReadOnly(Payload.SetReadOnly payload);
         /// <summary>
         /// Sets a channel’s topic.
         /// </summary>
-        Task<Result<ChannelResult>> SetTopic(ChannelsPayload.SetTopic payload);
+        Task<Result<ChannelResult>> SetTopic(Payload.SetTopic payload);
         /// <summary>
         /// Sets the type of room the channel should be.
         /// </summary>
-        Task<Result<ChannelResult>> SetType(ChannelsPayload.SetType payload);
+        Task<Result<ChannelResult>> SetType(Payload.SetType payload);
         /// <summary>
         /// Unarchives a channel.
         /// </summary>
-        Task<Result<bool>> Unarchive(ChannelsPayload payload);
+        Task<Result<bool>> Unarchive(Payload payload);
     }
 
     internal class ChannelsService: IChannelsService
@@ -183,7 +183,7 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public async Task<Result<ChannelResult>> AddAll(ChannelsPayload.AddAll payload)
+        public async Task<Result<ChannelResult>> AddAll(Payload.AddAll payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("addAll"), payload);
             return ServiceHelper.MapResponse(response);
@@ -191,21 +191,21 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> AddLeader(string roomId, string userId)
         {
-            var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addLeader"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddModerator(string roomId, string userId)
         {
-            var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addModerator"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddOwner(string roomId, string userId)
         {
-            var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addOwner"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -219,14 +219,14 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Archive(string roomId)
         {
-            var payload = new ChannelsPayload { roomId = roomId };
+            var payload = new Payload { roomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("archive"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> Close(string roomId)
         {
-            var payload = new ChannelsPayload { roomId = roomId };
+            var payload = new Payload { roomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("close"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -238,7 +238,7 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Create(ChannelsPayload.Create payload)
+        public async Task<Result<ChannelResult>> Create(Payload.Create payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("create"), payload);
             return ServiceHelper.MapResponse(response);
@@ -246,7 +246,7 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Delete(string roomId)
         {
-            var payload = new ChannelsPayload { roomId = roomId };
+            var payload = new Payload { roomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("delete"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -285,24 +285,28 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(await _restClientService.Get<ChannelResult>(route));
         }
 
-        public async Task<Result<ChannelResult>> Invite(ChannelsPayload.UserAction payload)
+        public async Task<Result<ChannelResult>> Invite(Payload.UserAction payload)
         {
-            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("invite"), payload));
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("invite"), payload);
+            return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Join(ChannelsPayload.Join payload)
+        public async Task<Result<ChannelResult>> Join(Payload.Join payload)
         {
-            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("join"), payload));
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("join"), payload);
+            return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Kick(ChannelsPayload.UserAction payload)
+        public async Task<Result<ChannelResult>> Kick(Payload.UserAction payload)
         {
-            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("kick"), payload));
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("kick"), payload);
+            return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Leave(ChannelsPayload payload)
+        public async Task<Result<ChannelResult>> Leave(Payload payload)
         {
-            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("leave"), payload));
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("leave"), payload);
+            return ServiceHelper.MapResponse(response);
         }
 
         public async Task<Result<Channels>> List()
@@ -347,18 +351,18 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Open(string roomId)
         {
-            var payload = new ChannelsPayload { roomId = roomId };
+            var payload = new Payload { roomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("open"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
-        public async Task<Result<bool>> Removeleader(ChannelsPayload.UserAction payload)
+        public async Task<Result<bool>> Removeleader(Payload.UserAction payload)
         {
             var response = await _restClientService.Post<CallResult>(GetUrl("removeLeader"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Rename(ChannelsPayload.Rename payload)
+        public async Task<Result<ChannelResult>> Rename(Payload.Rename payload)
         {
             return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("rename"), payload));
         }
@@ -370,13 +374,13 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<AnnouncementResult>> SetAnnouncement(ChannelsPayload.SetAnnouncement payload)
+        public async Task<Result<AnnouncementResult>> SetAnnouncement(Payload.SetAnnouncement payload)
         {
             var response = await _restClientService.Post<AnnouncementResult>(GetUrl("setAnnouncement"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetCustomFields(ChannelsPayload.CustomFields payload)
+        public async Task<Result<ChannelResult>> SetCustomFields(Payload.CustomFields payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setCustomFields"), payload);
             return ServiceHelper.MapResponse(response);
@@ -384,43 +388,43 @@ namespace Rocket.Chat.Api.Core.Services
 
         public void SetDefault() => throw new NotImplementedException();
 
-        public async Task<Result<ChannelResult>> SetDescription(ChannelsPayload.SetDescription payload)
+        public async Task<Result<ChannelResult>> SetDescription(Payload.SetDescription payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setDescription"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetJoinCode(ChannelsPayload.SetJoinCode payload)
+        public async Task<Result<ChannelResult>> SetJoinCode(Payload.SetJoinCode payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setJoinCode"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetPurpose(ChannelsPayload.SetPurpose payload)
+        public async Task<Result<ChannelResult>> SetPurpose(Payload.SetPurpose payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setPurpose"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetReadOnly(ChannelsPayload.SetReadOnly payload)
+        public async Task<Result<ChannelResult>> SetReadOnly(Payload.SetReadOnly payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setReadOnly"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetTopic(ChannelsPayload.SetTopic payload)
+        public async Task<Result<ChannelResult>> SetTopic(Payload.SetTopic payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setTopic"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetType(ChannelsPayload.SetType payload)
+        public async Task<Result<ChannelResult>> SetType(Payload.SetType payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setType"), payload);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<bool>> Unarchive(ChannelsPayload payload)
+        public async Task<Result<bool>> Unarchive(Payload payload)
         {
             var response = await _restClientService.Post<CallResult>(GetUrl("unarchive"), payload);
             return ServiceHelper.MapBoolResponse(response);

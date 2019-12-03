@@ -1,12 +1,12 @@
-﻿namespace Rocket.Chat.Domain.MethodResults
+﻿using System;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
+
+using Rocket.Chat.Domain.JsonConverters;
+
+namespace Rocket.Chat.Domain.MethodResults
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Newtonsoft.Json;
-
-    using Rocket.Chat.Domain.JsonConverters;
-
     public class StatisticsResult
     {
         [JsonProperty(PropertyName = "_id")]
@@ -14,7 +14,6 @@
 
         public string UniqueId { get; set; }
 
-        [JsonConverter(typeof(MeteorDateConverter))]
         public DateTime CreatedAt { get; set; }
 
         public string Version { get; set; }
@@ -35,13 +34,10 @@
         public long AvgChannelUsers { get; set; }
         public long AvgPrivateGroupUsers { get; set; }
 
-        [JsonConverter(typeof(MeteorDateConverter))]
         public DateTime? LastLogin { get; set; }
 
-        [JsonConverter(typeof(MeteorDateConverter))]
         public DateTime? LastMessageSentAt { get; set; }
 
-        [JsonConverter(typeof(MeteorDateConverter))]
         public DateTime? LastSeenSubscription { get; set; }
 
         public Os Os { get; set; }
@@ -58,7 +54,6 @@
         public long Version { get; set; }
         public bool Locked { get; set; }
 
-        [JsonConverter(typeof(MeteorDateConverter))]
         public DateTime LockedAt { get; set; }
 
         public string BuildAt { get; set; }

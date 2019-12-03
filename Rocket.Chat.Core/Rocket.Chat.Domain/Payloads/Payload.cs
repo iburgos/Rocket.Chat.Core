@@ -2,74 +2,74 @@
 
 namespace Rocket.Chat.Domain.Payloads
 {
-    public class ChannelsPayload
+    public class Payload
     {
         public string roomId { get; set; }
-        public class AddAll : ChannelsPayload
+        public class AddAll : Payload
         {
             public bool activeUsersOnly { get; set; }
         }
 
-        public class UserAction : ChannelsPayload
+        public class UserAction : Payload
         {
             public string userId { get; set; }
         }
 
-        public class Create : ChannelsPayload
+        public class Create : Payload
         {
             public string name { get; set; }
             public IEnumerable<string> members { get; set; }
             public bool readOnly { get; set; }
         }
 
-        public class Join : ChannelsPayload
+        public class Join : Payload
         {
             public string joinCode { get; set; }
         }
 
-        public class Rename : ChannelsPayload
+        public class Rename : Payload
         {
             public string name { get; set; }
         }
 
-        public class SetAnnouncement : ChannelsPayload
+        public class SetAnnouncement : Payload
         {
             public string announcement { get; set; }
         }
 
-        public class CustomFields : ChannelsPayload
+        public class CustomFields : Payload
         {
             public string roomName { get; set; }
 
             public string customFields { get; set; }
         }
 
-        public class SetDescription : ChannelsPayload
+        public class SetDescription : Payload
         {
             public string description { get; set; }
         }
 
-        public class SetJoinCode : ChannelsPayload
+        public class SetJoinCode : Payload
         {
             public string joinCode { get; set; }
         }
 
-        public class SetPurpose : ChannelsPayload
+        public class SetPurpose : Payload
         {
             public string purpose { get; set; }
         }
 
-        public class SetReadOnly : ChannelsPayload
+        public class SetReadOnly : Payload
         {
             public bool readOnly { get; set; }
         }
 
-        public class SetTopic : ChannelsPayload
+        public class SetTopic : Payload
         {
             public string topic { get; set; }
         }
 
-        public class SetType : ChannelsPayload
+        public class SetType : Payload
         {
             /// <summary>
             /// The type of room this channel should be, either c or p.

@@ -1,8 +1,8 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Rocket.Chat.Domain.MethodResults
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-
     public class CollectionResult
     {
         [JsonProperty(PropertyName = "collection")]
