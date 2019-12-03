@@ -6,7 +6,6 @@ using Rocket.Chat.Domain.MethodResults.Channels;
 using Rocket.Chat.Domain.Payloads;
 using Rocket.Chat.Domain.Queries;
 using System;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -193,19 +192,22 @@ namespace Rocket.Chat.Api.Core.Services
         public async Task<Result<bool>> AddLeader(string roomId, string userId)
         {
             var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
-            return await ProcessBooleanRequest(GetUrl("addLeader"), payload);
+            var response = await _restClientService.Post<CallResult>(GetUrl("addLeader"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddModerator(string roomId, string userId)
         {
             var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
-            return await ProcessBooleanRequest(GetUrl("addModerator"), payload);
+            var response = await _restClientService.Post<CallResult>(GetUrl("addModerator"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddOwner(string roomId, string userId)
         {
             var payload = new ChannelsPayload.UserAction { roomId = roomId, userId = userId };
-            return await ProcessBooleanRequest(GetUrl("addOwner"), payload);
+            var response = await _restClientService.Post<CallResult>(GetUrl("addOwner"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<Messages>> AnonymousRead(Query query)
@@ -217,12 +219,16 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Archive(string roomId)
         {
-            return await ProcessBooleanRequest(GetUrl("archive"), new ChannelsPayload { roomId = roomId });
+            var payload = new ChannelsPayload { roomId = roomId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("archive"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> Close(string roomId)
         {
-            return await ProcessBooleanRequest(GetUrl("close"), new ChannelsPayload { roomId = roomId });
+            var payload = new ChannelsPayload { roomId = roomId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("close"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<Counters>> Counters(ChannelQuery.Counters query)
@@ -240,7 +246,9 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Delete(string roomId)
         {
-            return await ProcessBooleanRequest(GetUrl("delete"), new ChannelsPayload { roomId = roomId });
+            var payload = new ChannelsPayload { roomId = roomId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("delete"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<Files>> Files(ChannelQuery.Channel query)
@@ -339,12 +347,15 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Open(string roomId)
         {
-            return await ProcessBooleanRequest(GetUrl("open"), new ChannelsPayload { roomId = roomId });
+            var payload = new ChannelsPayload { roomId = roomId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("open"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> Removeleader(ChannelsPayload.UserAction payload)
         {
-            return await ProcessBooleanRequest(GetUrl("removeLeader"), payload);
+            var response = await _restClientService.Post<CallResult>(GetUrl("removeLeader"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<ChannelResult>> Rename(ChannelsPayload.Rename payload)
@@ -411,21 +422,8 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Unarchive(ChannelsPayload payload)
         {
-            return await ProcessBooleanRequest(GetUrl("unarchive"), payload);
-        }
-
-        private async Task<Result<bool>> ProcessBooleanRequest(string url, object payload)
-        {
-            var response = await _restClientService.Post<CallResult>(url, payload);
-
-            Result<bool> loginResult;
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = response.Result.Success ? new Result<bool>(true) : new Result<bool>(response.Result.Error);
-            else
-                loginResult = new Result<bool>(response.Message);
-
-            return loginResult;
+            var response = await _restClientService.Post<CallResult>(GetUrl("unarchive"), payload);
+            return ServiceHelper.MapBoolResponse(response);
         }
     }
 }

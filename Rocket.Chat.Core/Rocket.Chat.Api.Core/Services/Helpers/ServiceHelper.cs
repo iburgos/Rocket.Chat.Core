@@ -1,4 +1,5 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
+using Rocket.Chat.Domain.MethodResults;
 using System.Net;
 
 namespace Rocket.Chat.Api.Core.Services.Helpers
@@ -13,6 +14,18 @@ namespace Rocket.Chat.Api.Core.Services.Helpers
                 loginResult = new Result<TResult>(response.Result);
             else
                 loginResult = new Result<TResult>(response.Message);
+
+            return loginResult;
+        }
+
+        public static Result<bool> MapBoolResponse(ApiResponse<CallResult> response)
+        {
+            Result<bool> loginResult;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                loginResult = response.Result.Success ? new Result<bool>(true) : new Result<bool>(response.Result.Error);
+            else
+                loginResult = new Result<bool>(response.Message);
 
             return loginResult;
         }
