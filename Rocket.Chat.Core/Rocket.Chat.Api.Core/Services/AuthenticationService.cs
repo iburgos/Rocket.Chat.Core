@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using Rocket.Chat.Api.Core.RestHelpers;
+﻿using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Domain.Authentication;
 using Rocket.Chat.Domain.Requests;
 using System;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IAuthenticationService
@@ -20,14 +21,14 @@ namespace Rocket.Chat.Api.Core.Services
 
     internal class AuthenticationService: IAuthenticationService
     {
-        private readonly IMemoryCache _memoryCache;
+        private readonly IAuthHelper _authHelper;
         private readonly IRestClientService _restClientService;
 
         public AuthenticationService(
-            IMemoryCache memoryCache,
+            IAuthHelper authHelper,
             IRestClientService restClientService)
         {
-            _memoryCache = memoryCache;
+            _authHelper = authHelper;
             _restClientService = restClientService;
         }
 
@@ -47,9 +48,9 @@ namespace Rocket.Chat.Api.Core.Services
             {
                 loginResult = new Result<LoginResult>(response.Result);
                 var loginData = loginResult.Content.Data;
-                _memoryCache.Set(CacheHelper.AUTHORIZED_KEY, true);
-                _memoryCache.Set(CacheHelper.USER_ID_KEY, loginData.UserId);
-                _memoryCache.Set(CacheHelper.AUTH_TOKEN_KEY, loginData.AuthToken);
+                _authHelper.IsAuthorized = true;
+                _authHelper.UserId = loginData.UserId;
+                _authHelper.AuthToken = loginData.AuthToken;
             }
             else
                 loginResult = new Result<LoginResult>(response.Message);
@@ -81,9 +82,9 @@ namespace Rocket.Chat.Api.Core.Services
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 logoutResult = new Result<LogoutResult>(response.Result);
-                _memoryCache.Set(CacheHelper.AUTHORIZED_KEY, false);
-                _memoryCache.Set(CacheHelper.USER_ID_KEY, string.Empty);
-                _memoryCache.Set(CacheHelper.AUTH_TOKEN_KEY, string.Empty);
+                _authHelper.IsAuthorized = false;
+                _authHelper.UserId = string.Empty;
+                _authHelper.AuthToken = string.Empty;
             }
             else
                 logoutResult = new Result<LogoutResult>(response.Message);

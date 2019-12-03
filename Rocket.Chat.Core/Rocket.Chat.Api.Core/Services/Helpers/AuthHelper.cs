@@ -1,31 +1,16 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-
-namespace Rocket.Chat.Api.Core.Services
+﻿namespace Rocket.Chat.Api.Core.Services
 {
     public interface IAuthHelper
     {
-        bool IsAuthorized { get; }
-        string UserId { get; }
-        string AuthToken { get; }
+        bool IsAuthorized { get; set; }
+        string UserId { get; set; }
+        string AuthToken { get; set; }
     }
 
     public class AuthHelper: IAuthHelper
     {
-        public bool IsAuthorized { get { return _isAuthorized;  } }
-        public string UserId { get { return _userId; } }
-        public string AuthToken { get { return _authToken; } }
-
-        private readonly IMemoryCache _memoryCache;
-
-        public AuthHelper(IMemoryCache memoryCache)
-        {
-            _memoryCache = memoryCache;
-        }
-
-        private bool _isAuthorized => _memoryCache.TryGetValue(CacheHelper.AUTHORIZED_KEY, out bool isAuthorized) ? isAuthorized : false;
-
-        private string _userId => _memoryCache.TryGetValue(CacheHelper.USER_ID_KEY, out string userId) ? userId : string.Empty;
-
-        private string _authToken => _memoryCache.TryGetValue(CacheHelper.AUTH_TOKEN_KEY, out string authToken) ? authToken : string.Empty;
+        public bool IsAuthorized { get; set; }
+        public string UserId { get; set; }
+        public string AuthToken { get; set; }
     }
 }

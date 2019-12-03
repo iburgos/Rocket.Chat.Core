@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using RestSharp;
+﻿using RestSharp;
 using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Api.Core.Services;
-using SimpleInjector;
 
 namespace Rocket.Chat.Api.Core
 {
@@ -12,28 +10,22 @@ namespace Rocket.Chat.Api.Core
 
         public RocketChat(string serverUrl)
         {
-            var container = new Container();
-            container.Register<IRestClient>(() => new RestClient(serverUrl));
-            container.Register<IJsonConvertHelper, JsonConvertHelper>();
-            container.Register<IRestClientService, RestClientService>();
-            container.Register<IAuthenticationService, AuthenticationService>();
-            container.Register<IChannelsService, ChannelsService>();
-            container.Register<IGroupsService, GroupsService>();
-            container.Register<IUsersService, UsersService>();
-            container.Register<IChatService, ChatService>();
-            container.Register<IRocketChatApi, RocketChatApi>();
-            container.Register<IAuthHelper, AuthHelper>();
-
-            var options = new MemoryCacheOptions
-            {
-                ExpirationScanFrequency = new System.TimeSpan(days: 1, hours: 0, minutes: 0, seconds: 0)
-            };
-
-            container.Register<IMemoryCache>(() => new MemoryCache(options), Lifestyle.Singleton);
-
-            container.Verify();
-
-            Api = container.GetInstance<IRocketChatApi>();
+            IRestClient restClient = new RestClient(serverUrl);
+            IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
+            IAuthHelper authHelper = new AuthHelper();
+            IRestClientService restClientService = new RestClientService(authHelper, restClient, jsonConvertHelper);
+            IAuthenticationService authService = new AuthenticationService(authHelper, restClientService);
+            IChannelsService channelsService = new ChannelsService(restClientService);
+            IGroupsService groupsService = new GroupsService(restClientService);
+            IUsersService usersService = new UsersService(restClientService);
+            IChatService chatService = new ChatService(restClientService);
+            
+            Api = new RocketChatApi(
+                chatService,
+                usersService,
+                groupsService,
+                channelsService,
+                authService);
         }       
     }
 }

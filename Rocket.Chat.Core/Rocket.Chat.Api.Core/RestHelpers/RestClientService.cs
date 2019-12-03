@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using RestSharp;
+﻿using RestSharp;
 using Rocket.Chat.Api.Core.Services;
 using Serilog;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Rocket.Chat.Api.Core.RestHelpers
@@ -21,16 +19,16 @@ namespace Rocket.Chat.Api.Core.RestHelpers
     public class RestClientService : IRestClientService
     {
         public ILogger Logger = Log.Logger;
-        private readonly IAuthHelper _authService;
+        private readonly IAuthHelper _authHelper;
         private readonly IRestClient _restClient;
         private readonly IJsonConvertHelper _jsonConvertHelper;
 
         public RestClientService(
-            IAuthHelper authService,
+            IAuthHelper authHelper,
             IRestClient restClient,
             IJsonConvertHelper jsonConvertHelper)
         {
-            _authService = authService;
+            _authHelper = authHelper;
             _restClient = restClient;
             _jsonConvertHelper = jsonConvertHelper;
         }
@@ -163,10 +161,10 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             request.AddHeader("Accept", "application/json");
             request.AddHeader("Content-Type", "application/json");
 
-            if (_authService.IsAuthorized)
+            if (_authHelper.IsAuthorized)
             {
-                request.AddHeader("X-User-Id", _authService.UserId);
-                request.AddHeader("X-Auth-Token", _authService.AuthToken);
+                request.AddHeader("X-User-Id", _authHelper.UserId);
+                request.AddHeader("X-Auth-Token", _authHelper.AuthToken);
             }
 
             if (body != null)

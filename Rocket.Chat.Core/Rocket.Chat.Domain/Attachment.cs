@@ -1,11 +1,9 @@
+using System;
+
+using Newtonsoft.Json;
+
 namespace Rocket.Chat.Domain
 {
-    using System;
-
-    using Newtonsoft.Json;
-
-    using Rocket.Chat.Domain.JsonConverters;
-
     public class Attachment
     {
         [JsonProperty(PropertyName = "title")]
@@ -32,9 +30,6 @@ namespace Rocket.Chat.Domain
         [JsonProperty(PropertyName = "thumb_url")]
         public string ThumbUrl { get; set; }
 
-        /// <summary>
-        /// e.g. #FF0000
-        /// </summary>
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }
 
@@ -51,11 +46,11 @@ namespace Rocket.Chat.Domain
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
                 return false;
             return Equals((Attachment) obj);
         }
