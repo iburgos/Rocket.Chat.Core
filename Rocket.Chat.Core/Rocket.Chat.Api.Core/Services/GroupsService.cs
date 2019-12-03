@@ -6,7 +6,6 @@ using Rocket.Chat.Domain.MethodResults.Channels;
 using Rocket.Chat.Domain.MethodResults.Groups;
 using Rocket.Chat.Domain.Payloads;
 using Rocket.Chat.Domain.Queries;
-using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -82,11 +81,11 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// List the private groups the caller is part of.
         /// </summary>
-        Task<Result<Groups>> List();
+        Task<Result<Groups>> List(BasicQuery query);
         /// <summary>
         /// List all the private groups.
         /// </summary>
-        void ListAll();
+        Task<Result<Groups>> ListAll(FullQuery query);
         /// <summary>
         /// List all moderators of a group.
         /// </summary>
@@ -277,13 +276,14 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<Groups>> List()
+        public async Task<Result<Groups>> List(BasicQuery query)
         {
-            var response = await _restClientService.Get<Groups>(GetUrl("list"));
+            string route = $"{GetUrl("list")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Groups>(route);
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<Groups>> ListAll(Query query)
+        public async Task<Result<Groups>> ListAll(FullQuery query)
         {
             string route = $"{GetUrl("listAll")}{query.ToQueryString()}";
             var response = await _restClientService.Get<Groups>(route);

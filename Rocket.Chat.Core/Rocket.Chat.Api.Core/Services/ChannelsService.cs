@@ -33,7 +33,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Gets the messages in public channels to an anonymous user
         /// </summary>
-        Task<Result<Messages>> AnonymousRead(Query query);
+        Task<Result<Messages>> AnonymousRead(FullQuery query);
         /// <summary>
         /// Archives a channel.
         /// </summary>
@@ -210,7 +210,7 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapBoolResponse(response);
         }
 
-        public async Task<Result<Messages>> AnonymousRead(Query query)
+        public async Task<Result<Messages>> AnonymousRead(FullQuery query)
         {
             string route = $"{GetUrl("anonymousread")}{query.ToQueryString()}";
             var response = await _restClientService.Get<Messages>(route);
