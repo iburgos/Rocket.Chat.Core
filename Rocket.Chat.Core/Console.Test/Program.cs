@@ -1,8 +1,8 @@
 ﻿using Rocket.Chat.Api.Core;
 using Rocket.Chat.Api.Core.Services;
 using Rocket.Chat.Domain;
-using System;
-using System.Threading;
+using Rocket.Chat.Domain.Payloads;
+using Rocket.Chat.Domain.Queries;
 using System.Threading.Tasks;
 
 namespace Console.Test
@@ -14,7 +14,6 @@ namespace Console.Test
             Task.Run(async () => await StartRestApi());
             System.Console.ReadLine();
         }
-
 
         private static async Task StartRestApi()
         {
@@ -30,13 +29,36 @@ namespace Console.Test
                 {
                     System.Console.WriteLine($"{channel.Id} - {channel.Name}");
 
-                    if (channel.Id == "B62Ymajnhem7r2rPW")
+                    if (channel.Fname == "testingChannel")
                     {
-                        Result<Messages> messagesResult = await rocketChat.Api.Channels.Messages(channel.Id);
-                        var messages = messagesResult.Content;
+                        var result = await DeleteChannel(rocketChat, channel.Id);
+
+                        //ChannelQuery.History query = new ChannelQuery.History
+                        //{
+                        //    RoomId = channel.Id,
+                        //    Offset = 50,
+                        //    Inclusive = true
+                        //};
+
+                        //Result<Messages> messagesResult = await rocketChat.Api.Channels.History(query);
+                        //var messages = messagesResult.Content;
+
+                        //Result<Messages> messagesResult = await rocketChat.Api.Channels.Messages(channel.Id);
+                        //var messages = messagesResult.Content;
                     }
                 }
             }
+        }
+
+        private static async Task CreateChannel(RocketChat rocketChat)
+        {
+            var payload = new Payload.Create { name = "testingChannel" };
+            await rocketChat.Api.Channels.Create(payload);
+        }
+
+        private static async Task<Result<bool>> DeleteChannel(RocketChat rocketChat, string roomId)
+        {
+            return await rocketChat.Api.Channels.Delete(roomId);
         }
     }
 }

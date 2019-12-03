@@ -1,13 +1,23 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
+using Rocket.Chat.Api.Core.Services.Helpers;
+using Rocket.Chat.Domain.MethodResults.Chat;
+using Rocket.Chat.Domain.Payloads;
 using System;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IChatService
     {
-        void Delete();
+        /// <summary>
+        /// Deletes an existing chat message.
+        /// </summary>
+        Task<Result<DeleteMessageResult>> DeleteMessage(Payload.DeleteMessage payload);
+        /// <summary>
+        /// Follows a chat message to the message’s channel.
+        /// </summary>
         void FollowMessage();
         void GetDeletedMessages();
         void GetMentionedMessages();
@@ -45,9 +55,14 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public void Delete() => throw new NotImplementedException();
-        public void FollowMessage() => throw new NotImplementedException();
+        public async Task<Result<DeleteMessageResult>> DeleteMessage(Payload.DeleteMessage payload)
+        {
+            var response = await _restClientService.Post<DeleteMessageResult>(GetUrl("delete"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
+
         public void GetDeletedMessages() => throw new NotImplementedException();
+        public void FollowMessage() => throw new NotImplementedException();
         public void GetMentionedMessages() => throw new NotImplementedException();
         public void GetMessage() => throw new NotImplementedException();
         public void GetMessageReadReceipts() => throw new NotImplementedException();

@@ -76,5 +76,16 @@ namespace Rocket.Chat.Domain.Payloads
             /// </summary>
             public string type { get; set; }
         }
+
+        public class DeleteMessage: Payload
+        {
+            public string messageId { get; set; }
+            public bool asUser { get; set; }
+        }
+
+        public class FollowMessage : Payload
+        {
+            public string mid { get; set; }
+        }
     }
 }
