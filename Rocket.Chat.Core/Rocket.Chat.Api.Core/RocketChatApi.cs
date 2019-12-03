@@ -1,5 +1,7 @@
 ﻿using Rocket.Chat.Api.Core.Services;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core
 {
     public interface IRocketChatApi
@@ -11,7 +13,7 @@ namespace Rocket.Chat.Api.Core
         IAuthenticationService Authentication { get; }
     }
 
-    public class RocketChatApi : IRocketChatApi
+    internal class RocketChatApi : IRocketChatApi
     {
         public RocketChatApi(
             IChatService chatService,

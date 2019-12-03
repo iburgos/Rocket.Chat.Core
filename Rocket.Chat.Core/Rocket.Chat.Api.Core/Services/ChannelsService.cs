@@ -7,8 +7,10 @@ using Rocket.Chat.Domain.Payloads;
 using Rocket.Chat.Domain.Queries;
 using System;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IChannelsService
@@ -171,7 +173,7 @@ namespace Rocket.Chat.Api.Core.Services
         Task<Result<bool>> Unarchive(ChannelsPayload payload);
     }
 
-    public class ChannelsService: IChannelsService
+    internal class ChannelsService: IChannelsService
     {
         private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"channels.{endPoint}");
 
@@ -369,7 +371,7 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async void SetDefault() => throw new NotImplementedException();
+        public void SetDefault() => throw new NotImplementedException();
 
         public async Task<Result<ChannelResult>> SetDescription(ChannelsPayload.SetDescription payload)
         {

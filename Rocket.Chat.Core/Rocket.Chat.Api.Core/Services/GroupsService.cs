@@ -2,8 +2,10 @@
 using Rocket.Chat.Domain;
 using System;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IGroupsService
@@ -45,7 +47,7 @@ namespace Rocket.Chat.Api.Core.Services
         void Unarchive();
     }
 
-    public class GroupsService : IGroupsService
+    internal class GroupsService : IGroupsService
     {
         private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"groups.{endPoint}");
 

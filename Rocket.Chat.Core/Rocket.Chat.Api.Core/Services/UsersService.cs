@@ -1,6 +1,8 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
 using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IUsersService
@@ -31,7 +33,7 @@ namespace Rocket.Chat.Api.Core.Services
         void UpdateOwnBasicInfo();
     }
 
-    public class UsersService: IUsersService
+    internal class UsersService: IUsersService
     {
         private static string GetUrl(string endPoint) => ApiHelper.GetUrl($"users.{endPoint}");
 
