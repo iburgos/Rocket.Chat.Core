@@ -465,5 +465,33 @@ namespace Rocket.Chat.Domain.Payloads
             [JsonProperty("refreshAllClients")]
             public bool RefreshAllClients { get; set; }
         }
+
+        public class AutoTranslateSettings : Payload
+        {
+            /// <summary>
+            /// autoTranslate Or autoTranslateLanguage
+            /// </summary>
+            [JsonProperty("field")]
+            public string Field { get; set; }
+
+            /// <summary>
+            /// Boolean if the setting is autoTranslate and a string (the language) if the setting is autoTranslateLanguage.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            [JsonProperty("defaultLanguage")]
+            public string DefaultLanguage { get; set; }
+        }
+
+
+        public class TranslateMessage : Payload
+        {
+            [JsonProperty("messageId")]
+            public string MessageId { get; set; }
+
+            [JsonProperty("targetLanguage")]
+            public string TargetLanguage { get; set; }
+        }
     }
 }

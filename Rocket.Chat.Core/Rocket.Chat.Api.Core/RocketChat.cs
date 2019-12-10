@@ -21,6 +21,7 @@ namespace Rocket.Chat.Api.Core
             IChatService chatService = new ChatService(restClientService);
             IRoomService roomService = new RoomService(restClientService);
             IAssetsService assetsService = new AssetsService(restClientService);
+            IAutoTranslateService autoTranslateService = new AutoTranslateService(restClientService);
 
             Api = new RocketChatApi(
                 chatService,
@@ -29,7 +30,8 @@ namespace Rocket.Chat.Api.Core
                 channelsService,
                 authService,
                 roomService,
-                assetsService);
+                assetsService,
+                autoTranslateService);
         }       
     }
 }

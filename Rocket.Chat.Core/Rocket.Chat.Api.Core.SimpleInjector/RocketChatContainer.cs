@@ -39,6 +39,7 @@ namespace Rocket.Chat.Api.Core.SimpleInjector
             _container.Register<IChatService, ChatService>();
             _container.Register<IRoomService, RoomService>();
             _container.Register<IAssetsService, AssetsService>();
+            _container.Register<IAutoTranslateService, AutoTranslateService>();
         }
 
         public void Dispose()
