@@ -456,5 +456,14 @@ namespace Rocket.Chat.Domain.Payloads
                 public string MobilePushNotifications { get; set; }
             }
         }
+
+        public class Asset : Payload
+        {
+            [JsonProperty("assetName")]
+            public string AssetName { get; set; }
+
+            [JsonProperty("refreshAllClients")]
+            public bool RefreshAllClients { get; set; }
+        }
     }
 }

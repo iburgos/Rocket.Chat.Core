@@ -12,6 +12,7 @@ namespace Rocket.Chat.Api.Core
         IChannelsService Channels { get; }
         IAuthenticationService Authentication { get; }
         IRoomService RoomService { get; }
+        IAssetsService AssetsService { get; }
     }
 
     internal class RocketChatApi : IRocketChatApi
@@ -22,7 +23,8 @@ namespace Rocket.Chat.Api.Core
             IGroupsService groupsService,
             IChannelsService channelsService,
             IAuthenticationService authenticationService,
-            IRoomService roomService)
+            IRoomService roomService,
+            IAssetsService assetsService)
         {
             Chat = chatService;
             Users = usersService;
@@ -30,6 +32,7 @@ namespace Rocket.Chat.Api.Core
             Channels = channelsService;
             Authentication = authenticationService;
             RoomService = roomService;
+            AssetsService = assetsService;
         }
 
         public IChatService Chat { get; }
@@ -38,5 +41,6 @@ namespace Rocket.Chat.Api.Core
         public IChannelsService Channels { get; }
         public IAuthenticationService Authentication { get; }
         public IRoomService RoomService { get; }
+        public IAssetsService AssetsService { get; }
     }
 }
