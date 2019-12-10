@@ -236,5 +236,14 @@ namespace Rocket.Chat.Domain.Payloads
             [JsonProperty(PropertyName = "message")]
             public Message Message { get; set; }
         }
+
+        public class Update : Payload
+        {
+            [JsonProperty(PropertyName = "msgId")]
+            public string MessageId { get; set; }
+
+            [JsonProperty(PropertyName = "text")]
+            public string Text { get; set; }
+        }
     }
 }

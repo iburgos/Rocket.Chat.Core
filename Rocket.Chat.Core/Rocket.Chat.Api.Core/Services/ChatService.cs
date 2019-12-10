@@ -1,48 +1,16 @@
 ﻿using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Api.Core.Services.Helpers;
+using Rocket.Chat.Domain;
+using Rocket.Chat.Domain.MethodResults;
 using Rocket.Chat.Domain.MethodResults.Chat;
 using Rocket.Chat.Domain.Payloads;
-using System;
+using Rocket.Chat.Domain.Queries;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
-    public interface IChatService
-    {
-        /// <summary>
-        /// Deletes an existing chat message.
-        /// </summary>
-        Task<Result<DeleteMessageResult>> DeleteMessage(Payload.DeleteMessage payload);
-        /// <summary>
-        /// Follows a chat message to the message’s channel.
-        /// </summary>
-        void FollowMessage();
-        void GetDeletedMessages();
-        void GetMentionedMessages();
-        void GetMessage();
-        void GetMessageReadReceipts();
-        void GetPinnedMessages();
-        void GetSnippetedMessageById();
-        void GetStarredMessages();
-        void GetThreadMessages();
-        void GetThreadsList();
-        void IgnoreUser();
-        void PinMessage();
-        void PostMessage();
-        void React();
-        void ReportMessage();
-        void Search();
-        void StarMessage();
-        void SendMessage();
-        void SyncThreadMessages();
-        void SyncThreadsList();
-        void UnfollowMessage();
-        void UnPinMessage();
-        void UnStarMessage();
-        void Update();
-    }
 
     internal class ChatService: IChatService
     {
@@ -61,29 +29,167 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public void GetDeletedMessages() => throw new NotImplementedException();
-        public void FollowMessage() => throw new NotImplementedException();
-        public void GetMentionedMessages() => throw new NotImplementedException();
-        public void GetMessage() => throw new NotImplementedException();
-        public void GetMessageReadReceipts() => throw new NotImplementedException();
-        public void GetPinnedMessages() => throw new NotImplementedException();
-        public void GetSnippetedMessageById() => throw new NotImplementedException();
-        public void GetStarredMessages() => throw new NotImplementedException();
-        public void GetThreadMessages() => throw new NotImplementedException();
-        public void GetThreadsList() => throw new NotImplementedException();
-        public void IgnoreUser() => throw new NotImplementedException();
-        public void PinMessage() => throw new NotImplementedException();
-        public void PostMessage() => throw new NotImplementedException();
-        public void React() => throw new NotImplementedException();
-        public void ReportMessage() => throw new NotImplementedException();
-        public void Search() => throw new NotImplementedException();
-        public void StarMessage() => throw new NotImplementedException();
-        public void SendMessage() => throw new NotImplementedException();
-        public void SyncThreadMessages() => throw new NotImplementedException();
-        public void SyncThreadsList() => throw new NotImplementedException();
-        public void UnfollowMessage() => throw new NotImplementedException();
-        public void UnPinMessage() => throw new NotImplementedException();
-        public void UnStarMessage() => throw new NotImplementedException();
-        public void Update() => throw new NotImplementedException();
+        public async Task<Result<bool>> FollowMessage(Payload.FollowMessage payload)
+        {
+            var response = await _restClientService.Post<CallResult>(GetUrl("followMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<Messages>> GetDeletedMessages(ChatQuery.GetDeletedMessages query)
+        {
+            string route = $"{GetUrl("getDeletedMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse<Messages>(response);
+        }
+
+        public async Task<Result<Messages>> GetMentionedMessages(string roomId)
+        {
+            var query = new ChatQuery.Chat { RoomId = roomId };
+            string route = $"{GetUrl("getMentionedMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<MessageResult>> GetMessage(string messageId)
+        {
+            string route = $"{GetUrl("getMessage")}?msgId={messageId}";
+            var response = await _restClientService.Get<MessageResult>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<MessageReceipsResult>> GetMessageReadReceipts(string messageId)
+        {
+            string route = $"{GetUrl("getMessageReadReceipts")}?messageId={messageId}";
+            var response = await _restClientService.Get<MessageReceipsResult>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Messages>> GetPinnedMessages(ChatQuery.GetPinnedMessages query)
+        {
+            string route = $"{GetUrl("getPinnedMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<MessageResult>> GetSnippetedMessageById(string messageId)
+        {
+            string route = $"{GetUrl("getSnippetedMessageById")}?messageId={messageId}";
+            var response = await _restClientService.Get<MessageResult>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Messages>> GetStarredMessages(ChatQuery.GetStarredMessages query)
+        {
+            string route = $"{GetUrl("getStarredMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Messages>> GetThreadMessages(ChatQuery.GetThreadMessages query)
+        {
+            string route = $"{GetUrl("getThreadMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Threads>> GetThreadsList(ChatQuery.GetThreadList query)
+        {
+            string route = $"{GetUrl("getThreadsList")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Threads>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<bool>> IgnoreUser(ChatQuery.IgnoreUser query) 
+        {
+            string route = $"{GetUrl("ignoreUser")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<CallResult>(route);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<MessageResult>> PinMessage(string messageId)
+        {
+            var payload = new Payload.PinMessage { MessageId = messageId };
+            var response = await _restClientService.Post<MessageResult>(GetUrl("pinMessage"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<PostMessageResult>> PostMessage(Payload.PostMessage payload)
+        {
+            var response = await _restClientService.Post<PostMessageResult>(GetUrl("postMessage"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<bool>> React(Payload.React payload)
+        {
+            var response = await _restClientService.Post<CallResult>(GetUrl("react"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<bool>> ReportMessage(Payload.ReportMessage payload)
+        {
+            var response = await _restClientService.Post<CallResult>(GetUrl("reportMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<Messages>> Search(ChatQuery.Search query)
+        {
+            string route = $"{GetUrl("search")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<bool>> StarMessage(string messageId)
+        {
+            var payload = new Payload.StarMessage { MessageId = messageId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("starMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<MessageResult>> SendMessage(Payload.SendMessage payload)
+        {
+            var response = await _restClientService.Post<MessageResult>(GetUrl("sendMessage"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Messages>> SyncThreadMessages(ChatQuery.SyncThreadMessages query)
+        {
+            string route = $"{GetUrl("syncThreadMessages")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Messages>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<Threads>> SyncThreadsList(ChatQuery.SyncThreadList query)
+        {
+            string route = $"{GetUrl("syncThreadsList")}{query.ToQueryString()}";
+            var response = await _restClientService.Get<Threads>(route);
+            return ServiceHelper.MapResponse(response);
+        }
+
+        public async Task<Result<bool>> UnfollowMessage(string messageId)
+        {
+            var payload = new Payload.FollowMessage { MessageId = messageId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("unfollowMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<bool>> UnPinMessage(string messageId)
+        {
+            var payload = new Payload.PinMessage { MessageId = messageId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("unPinMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<bool>> UnStarMessage(string messageId)
+        {
+            var payload = new Payload.StarMessage { MessageId = messageId };
+            var response = await _restClientService.Post<CallResult>(GetUrl("unStarMessage"), payload);
+            return ServiceHelper.MapBoolResponse(response);
+        }
+
+        public async Task<Result<MessageResult>> Update(Payload.Update payload)
+        {
+            var response = await _restClientService.Post<MessageResult>(GetUrl("update"), payload);
+            return ServiceHelper.MapResponse(response);
+        }
     }
 }

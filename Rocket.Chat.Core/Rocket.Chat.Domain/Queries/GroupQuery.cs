@@ -43,7 +43,7 @@ namespace Rocket.Chat.Domain.Queries
             }
         }
 
-        public class History : ChannelQuery
+        public class History : GroupQuery
         {
             public DateTime? Latest { get; set; }
             public DateTime? Oldest { get; set; }
@@ -73,7 +73,7 @@ namespace Rocket.Chat.Domain.Queries
             }
         }
 
-        public class Members : ChannelQuery
+        public class Members : GroupQuery
         {
             public string RoomName { get; set; }
             public int? Offset { get; set; }
