@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using RestSharp.Serializers;
 using Rocket.Chat.Api.Core.RestHelpers;
 using Rocket.Chat.Api.Core.Services;
 
@@ -11,9 +12,9 @@ namespace Rocket.Chat.Api.Core
         public RocketChat(string serverUrl)
         {
             IRestClient restClient = new RestClient(serverUrl);
-            IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
+            IJsonSerializer jsonSerializer = new JsonSerializer();
             IAuthHelper authHelper = new AuthHelper();
-            IRestClientService restClientService = new RestClientService(authHelper, restClient, jsonConvertHelper);
+            IRestClientService restClientService = new RestClientService(authHelper, restClient, jsonSerializer);
             IAuthenticationService authService = new AuthenticationService(authHelper, restClientService);
             IChannelsService channelsService = new ChannelsService(restClientService);
             IGroupsService groupsService = new GroupsService(restClientService);

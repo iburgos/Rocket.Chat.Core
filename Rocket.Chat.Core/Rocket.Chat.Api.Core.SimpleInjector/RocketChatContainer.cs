@@ -16,7 +16,7 @@ namespace Rocket.Chat.Api.Core.SimpleInjector
         {
             _container = new Container();
             _container.Register<IRestClient>(() => new RestClient(serverUrl));
-            _container.Register<IJsonConvertHelper, JsonConvertHelper>();
+            _container.Register<IJsonSerializer, JsonSerializer>();
             _container.Register<IRestClientService, RestClientService>();
             _container.Register<IAuthenticationService, AuthenticationService>();
             _container.Register<IChannelsService, ChannelsService>();

@@ -21,16 +21,16 @@ namespace Rocket.Chat.Api.Core.RestHelpers
         public ILogger Logger = Log.Logger;
         private readonly IAuthHelper _authHelper;
         private readonly IRestClient _restClient;
-        private readonly IJsonConvertHelper _jsonConvertHelper;
+        private readonly IJsonSerializer _jsonSerializer;
 
         public RestClientService(
             IAuthHelper authHelper,
             IRestClient restClient,
-            IJsonConvertHelper jsonConvertHelper)
+            IJsonSerializer jsonSerializer)
         {
             _authHelper = authHelper;
             _restClient = restClient;
-            _jsonConvertHelper = jsonConvertHelper;
+            _jsonSerializer = jsonSerializer;
         }
 
         public async Task<ApiResponse<TResult>> Post<TResult>(string route, object body)
@@ -42,7 +42,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -63,7 +63,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -84,7 +84,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -105,7 +105,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -169,7 +169,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
 
             if (body != null)
             {
-                request.AddJsonBody(body);
+                request.AddJsonBody(_jsonSerializer.Serialize(body));
             }
 
             return request;
