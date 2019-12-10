@@ -26,8 +26,8 @@ namespace Rocket.Chat.Api.Core.Services
         {
             var loginRequest = new LoginRequest
             {
-                user = user,
-                password = password
+                User = user,
+                Password = password
             };
 
             ApiResponse<LoginResult> response = await _restClientService.Post<LoginResult>(ApiHelper.GetUrl("login"), loginRequest);
