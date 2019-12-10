@@ -6,87 +6,87 @@ namespace Rocket.Chat.Domain.Payloads
 {
     public class Payload
     {
-        [JsonProperty(PropertyName = "roomId")]
+        [JsonProperty("roomId")]
         public string RoomId { get; set; }
 
         public class AddAll : Payload
         {
-            [JsonProperty(PropertyName = "activeUsersOnly")]
+            [JsonProperty("activeUsersOnly")]
             public bool ActiveUsersOnly { get; set; }
         }
 
         public class UserAction : Payload
         {
-            [JsonProperty(PropertyName = "userId")]
+            [JsonProperty("userId")]
             public string UserId { get; set; }
         }
 
         public class Create : Payload
         {
-            [JsonProperty(PropertyName = "name")]
+            [JsonProperty("name")]
             public string Name { get; set; }
 
-            [JsonProperty(PropertyName = "members")]
+            [JsonProperty("members")]
             public IEnumerable<string> Members { get; set; }
 
-            [JsonProperty(PropertyName = "readOnly")]
+            [JsonProperty("readOnly")]
             public bool ReadOnly { get; set; }
         }
 
         public class Join : Payload
         {
-            [JsonProperty(PropertyName = "joinCode")]
+            [JsonProperty("joinCode")]
             public string JoinCode { get; set; }
         }
 
         public class Rename : Payload
         {
-            [JsonProperty(PropertyName = "name")]
+            [JsonProperty("name")]
             public string Name { get; set; }
         }
 
         public class SetAnnouncement : Payload
         {
-            [JsonProperty(PropertyName = "announcement")]
+            [JsonProperty("announcement")]
             public string Announcement { get; set; }
         }
 
         public class SetCustomFields : Payload
         {
-            [JsonProperty(PropertyName = "roomName")]
+            [JsonProperty("roomName")]
             public string RoomName { get; set; }
 
-            [JsonProperty(PropertyName = "customFields")]
+            [JsonProperty("customFields")]
             public string CustomFields { get; set; }
         }
 
         public class SetDescription : Payload
         {
-            [JsonProperty(PropertyName = "description")]
+            [JsonProperty("description")]
             public string Description { get; set; }
         }
 
         public class SetJoinCode : Payload
         {
-            [JsonProperty(PropertyName = "joinCode")]
+            [JsonProperty("joinCode")]
             public string JoinCode { get; set; }
         }
 
         public class SetPurpose : Payload
         {
-            [JsonProperty(PropertyName = "purpose")]
+            [JsonProperty("purpose")]
             public string Purpose { get; set; }
         }
 
         public class SetReadOnly : Payload
         {
-            [JsonProperty(PropertyName = "readOnly")]
+            [JsonProperty("readOnly")]
             public bool ReadOnly { get; set; }
         }
 
         public class SetTopic : Payload
         {
-            [JsonProperty(PropertyName = "topic")]
+            [JsonProperty("topic")]
             public string Topic { get; set; }
         }
 
@@ -95,116 +95,116 @@ namespace Rocket.Chat.Domain.Payloads
             /// <summary>
             /// The type of room this channel should be, either c or p.
             /// </summary>
-            [JsonProperty(PropertyName = "type")]
+            [JsonProperty("type")]
             public string Type { get; set; }
         }
 
         public class DeleteMessage: Payload
         {
-            [JsonProperty(PropertyName = "messageId")]
+            [JsonProperty("messageId")]
             public string MessageId { get; set; }
 
-            [JsonProperty(PropertyName = "asUser")]
+            [JsonProperty("asUser")]
             public bool AsUser { get; set; }
         }
 
         public class FollowMessage : Payload
         {
-            [JsonProperty(PropertyName = "mid")]
+            [JsonProperty("mid")]
             public string MessageId { get; set; }
         }
 
         public class PinMessage : Payload
         {
-            [JsonProperty(PropertyName = "messageId")]
+            [JsonProperty("messageId")]
             public string MessageId { get; set; }
         }
 
         public class StarMessage : Payload
         {
-            [JsonProperty(PropertyName = "messageId")]
+            [JsonProperty("messageId")]
             public string MessageId { get; set; }
         }
 
         public class PostMessage : Payload
         {
-            [JsonProperty(PropertyName = "channel")]
+            [JsonProperty("channel")]
             public string Channel { get; set; }
 
-            [JsonProperty(PropertyName = "text")]
+            [JsonProperty("text")]
             public string Text { get; set; }
 
-            [JsonProperty(PropertyName = "alias")]
+            [JsonProperty("alias")]
             public string Alias { get; set; }
 
-            [JsonProperty(PropertyName = "emoji")]
+            [JsonProperty("emoji")]
             public string Emoji { get; set; }
 
-            [JsonProperty(PropertyName = "avatar")]
+            [JsonProperty("avatar")]
             public string Avatar { get; set; }
 
-            [JsonProperty(PropertyName = "attachments")]
+            [JsonProperty("attachments")]
             public IEnumerable<Attachment> Attachments { get; set; }
 
             public class Attachment
             {
-                [JsonProperty(PropertyName = "color")]
+                [JsonProperty("color")]
                 public string Color { get; set; }
 
-                [JsonProperty(PropertyName = "text")]
+                [JsonProperty("text")]
                 public string Text { get; set; }
 
-                [JsonProperty(PropertyName = "channel")]
+                [JsonProperty("channel")]
                 public string Channel { get; set; }
 
-                [JsonProperty(PropertyName = "ts")]
+                [JsonProperty("ts")]
                 public DateTime TimeStamp { get; set; }
 
-                [JsonProperty(PropertyName = "thumb_url")]
+                [JsonProperty("thumb_url")]
                 public string ThumbUrl { get; set; }
 
-                [JsonProperty(PropertyName = "message_link")]
+                [JsonProperty("message_link")]
                 public string MessageLink { get; set; }
 
-                [JsonProperty(PropertyName = "collapsed")]
+                [JsonProperty("collapsed")]
                 public bool Collapsed { get; set; }
 
-                [JsonProperty(PropertyName = "author_name")]
+                [JsonProperty("author_name")]
                 public string AuthorName { get; set; }
 
-                [JsonProperty(PropertyName = "author_link")]
+                [JsonProperty("author_link")]
                 public string AuthorLink { get; set; }
 
-                [JsonProperty(PropertyName = "author_icon")]
+                [JsonProperty("author_icon")]
                 public string AuthorIcon { get; set; }
 
-                [JsonProperty(PropertyName = "title")]
+                [JsonProperty("title")]
                 public string Title { get; set; }
 
-                [JsonProperty(PropertyName = "title_link")]
+                [JsonProperty("title_link")]
                 public string TitleLink { get; set; }
 
-                [JsonProperty(PropertyName = "title_link_download")]
+                [JsonProperty("title_link_download")]
                 public bool TitleLinkDownload { get; set; }
 
-                [JsonProperty(PropertyName = "image_url")]
+                [JsonProperty("image_url")]
                 public string ImageUrl { get; set; }
 
-                [JsonProperty(PropertyName = "audio_url")]
+                [JsonProperty("audio_url")]
                 public string AudioUrl { get; set; }
 
-                [JsonProperty(PropertyName = "video_url")]
+                [JsonProperty("video_url")]
                 public string VideoUrl { get; set; }
 
-                [JsonProperty(PropertyName = "fields")]
+                [JsonProperty("fields")]
                 public IEnumerable<Field> Fields { get; set; }
 
                 public class Field
                 {
-                    [JsonProperty(PropertyName = "title")]
+                    [JsonProperty("title")]
                     public string Title { get; set; }
 
-                    [JsonProperty(PropertyName = "value")]
+                    [JsonProperty("value")]
                     public string Value { get; set; }
                 }
             }
@@ -212,165 +212,213 @@ namespace Rocket.Chat.Domain.Payloads
 
         public class React : Payload
         {
-            [JsonProperty(PropertyName = "emoji")]
+            [JsonProperty("emoji")]
             public string Emoji { get; set; }
 
-            [JsonProperty(PropertyName = "messageId")]
+            [JsonProperty("messageId")]
             public string MessageId { get; set; }
 
-            [JsonProperty(PropertyName = "shouldReact")]
+            [JsonProperty("shouldReact")]
             public bool ShouldReact { get; set; }
         }
 
         public class ReportMessage : Payload
         {
-            [JsonProperty(PropertyName = "messageId")]
+            [JsonProperty("messageId")]
             public string MessageId { get; set; }
 
-            [JsonProperty(PropertyName = "description")]
+            [JsonProperty("description")]
             public string Description { get; set; }
         }
 
         public class SendMessage : Payload
         {
-            [JsonProperty(PropertyName = "message")]
+            [JsonProperty("message")]
             public Message Message { get; set; }
         }
 
         public class Update : Payload
         {
-            [JsonProperty(PropertyName = "msgId")]
+            [JsonProperty("msgId")]
             public string MessageId { get; set; }
 
-            [JsonProperty(PropertyName = "text")]
+            [JsonProperty("text")]
             public string Text { get; set; }
         }
 
         public class User : Payload
         {
-            [JsonProperty(PropertyName = "email")]
+            [JsonProperty("email")]
             public string Email { get; set; }
 
-            [JsonProperty(PropertyName = "name")]
+            [JsonProperty("name")]
             public string Name { get; set; }
 
-            [JsonProperty(PropertyName = "password")]
+            [JsonProperty("password")]
             public string Password { get; set; }
 
-            [JsonProperty(PropertyName = "username")]
+            [JsonProperty("username")]
             public string Username { get; set; }
 
-            [JsonProperty(PropertyName = "active")]
+            [JsonProperty("active")]
             public bool Active { get; set; }
 
-            [JsonProperty(PropertyName = "roles")]
+            [JsonProperty("roles")]
             public IEnumerable<string> Roles { get; set; }
 
-            [JsonProperty(PropertyName = "joinDefaultChannels")]
+            [JsonProperty("joinDefaultChannels")]
             public bool JoinDefaultChannels { get; set; }
 
-            [JsonProperty(PropertyName = "requirePasswordChange")]
+            [JsonProperty("requirePasswordChange")]
             public bool RequirePasswordChange { get; set; }
 
-            [JsonProperty(PropertyName = "sendWelcomeEmail")]
+            [JsonProperty("sendWelcomeEmail")]
             public bool SendWelcomeEmail { get; set; }
 
-            [JsonProperty(PropertyName = "verified")]
+            [JsonProperty("verified")]
             public bool Verified { get; set; }
 
-            [JsonProperty(PropertyName = "customFields")]
+            [JsonProperty("customFields")]
             public string CustomFields { get; set; }
         }
 
         public class DeleteOwnAccount : Payload
         {
-            [JsonProperty(PropertyName = "password")]
+            [JsonProperty("password")]
             public string Password { get; set; }
         }
 
         public class ForgotPassword : Payload
         {
-            [JsonProperty(PropertyName = "email")]
+            [JsonProperty("email")]
             public string Email { get; set; }
         }
 
         public class PersonalAccessToken : Payload
         {
-            [JsonProperty(PropertyName = "tokenName")]
+            [JsonProperty("tokenName")]
             public string TokenName { get; set; }
         }
 
         public class RegisterUser : Payload
         {
-            [JsonProperty(PropertyName = "username")]
+            [JsonProperty("username")]
             public string Username { get; set; }
 
-            [JsonProperty(PropertyName = "email")]
+            [JsonProperty("email")]
             public string Email { get; set; }
 
-            [JsonProperty(PropertyName = "pass")]
+            [JsonProperty("pass")]
             public string Password { get; set; }
 
-            [JsonProperty(PropertyName = "name")]
+            [JsonProperty("name")]
             public string Name { get; set; }
 
-            [JsonProperty(PropertyName = "secretURL")]
+            [JsonProperty("secretURL")]
             public string SecretURL { get; set; }
         }
 
         public class SetAvatar : Payload
         {
-            [JsonProperty(PropertyName = "userId")]
+            [JsonProperty("userId")]
             public string UserId { get; set; }
 
-            [JsonProperty(PropertyName = "avatarUrl")]
+            [JsonProperty("avatarUrl")]
             public string AvatarUrl { get; set; }
         }
 
         public class SetActive : Payload
         {
-            [JsonProperty(PropertyName = "userId")]
+            [JsonProperty("userId")]
             public string UserId { get; set; }
 
-            [JsonProperty(PropertyName = "activeStatus")]
+            [JsonProperty("activeStatus")]
             public bool ActiveStatus { get; set; }
         }
 
         public class UpdateUser : Payload
         {
-            [JsonProperty(PropertyName = "userId")]
+            [JsonProperty("userId")]
             public string UserId { get; set; }
 
-            [JsonProperty(PropertyName = "data")]
+            [JsonProperty("data")]
             public User Data { get; set; }
         }
 
         public class UpdateOwnBasicInfo : Payload
         {
-            [JsonProperty(PropertyName = "data")]
+            [JsonProperty("data")]
             public OwnBasicInfo Data { get; set; }
 
 
             public class OwnBasicInfo
             {
-                [JsonProperty(PropertyName = "email")]
+                [JsonProperty("email")]
                 public string Email { get; set; }
 
-                [JsonProperty(PropertyName = "name")]
+                [JsonProperty("name")]
                 public string Name { get; set; }
 
-                [JsonProperty(PropertyName = "username")]
+                [JsonProperty("username")]
                 public string Username { get; set; }
 
-                [JsonProperty(PropertyName = "currentPassword")]
+                [JsonProperty("currentPassword")]
                 public string CurrentPassword { get; set; }
 
-                [JsonProperty(PropertyName = "newPassword")]
+                [JsonProperty("newPassword")]
                 public string NewPassword { get; set; }
 
-                [JsonProperty(PropertyName = "customFields")]
+                [JsonProperty("customFields")]
                 public string customFields { get; set; }
             }
+        }
+
+        public class CleanHistory : Payload
+        {
+            [JsonProperty("latest")]
+            public DateTime Latest { get; set; }
+
+            [JsonProperty("oldest")]
+            public DateTime Oldest { get; set; }
+
+            [JsonProperty("inclusive")]
+            public bool Inclusive { get; set; }
+
+            [JsonProperty("excludePinned")]
+            public bool ExcludePinned { get; set; }
+
+            [JsonProperty("filesOnly")]
+            public bool FilesOnly { get; set; }
+
+            [JsonProperty("users")]
+            public IEnumerable<string> Users { get; set; }
+        }
+
+        public class CreateDiscussion : Payload
+        {
+            [JsonProperty("prid")]
+            public string ParentRoomId { get; set; }
+
+            [JsonProperty("t_name")]
+            public string DiscussionName { get; set; }
+
+            [JsonProperty("users")]
+            public IEnumerable<string> Users { get; set; }
+
+            [JsonProperty("pmid")]
+            public string ParentMessageId { get; set; }
+
+            [JsonProperty("excludePinned")]
+            public bool ExcludePinned { get; set; }
+
+            [JsonProperty("reply")]
+            public string Reply { get; set; }
+        }
+
+        public class FavoriteRoom : Payload
+        {
+            [JsonProperty("favorite")]
+            public bool Favorite { get; set; }
         }
     }
 }

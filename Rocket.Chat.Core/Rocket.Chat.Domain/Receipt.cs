@@ -5,22 +5,22 @@ namespace Rocket.Chat.Domain
 {
     public class Receipt
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "roomId")]
+        [JsonProperty("roomId")]
         public string RoomId { get; set; }
 
-        [JsonProperty(PropertyName = "userId")]
+        [JsonProperty("userId")]
         public string UserId { get; set; }
 
-        [JsonProperty(PropertyName = "messageId")]
+        [JsonProperty("messageId")]
         public string MessageId { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "user")]
+        [JsonProperty("user")]
         public User User { get; set; }
     }
 }

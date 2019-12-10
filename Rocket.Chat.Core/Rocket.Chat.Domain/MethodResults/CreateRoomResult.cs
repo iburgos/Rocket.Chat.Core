@@ -4,7 +4,7 @@ namespace Rocket.Chat.Domain.MethodResults
 {
     public class CreateRoomResult
     {
-        [JsonProperty(PropertyName = "rid")]
+        [JsonProperty("rid")]
         public string RoomId { get; set; }
     }
 }

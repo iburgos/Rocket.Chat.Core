@@ -5,13 +5,13 @@ namespace Rocket.Chat.Domain
 {
     public class Users
     {
-        [JsonProperty(PropertyName = "users")]
+        [JsonProperty("users")]
         public IEnumerable<User> _Users { get; set; }
 
-        [JsonProperty(PropertyName = "full")]
+        [JsonProperty("full")]
         public bool Full { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

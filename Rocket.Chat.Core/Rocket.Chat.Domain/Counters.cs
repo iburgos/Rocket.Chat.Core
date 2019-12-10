@@ -5,28 +5,28 @@ namespace Rocket.Chat.Domain
 {
     public class Counters
     {
-        [JsonProperty(PropertyName = "joined")]
+        [JsonProperty("joined")]
         public bool Joined { get; set; }
 
-        [JsonProperty(PropertyName = "members")]
+        [JsonProperty("members")]
         public int Members { get; set; }
 
-        [JsonProperty(PropertyName = "unreads")]
+        [JsonProperty("unreads")]
         public int Unreads { get; set; }
 
-        [JsonProperty(PropertyName = "unreadsFrom")]
+        [JsonProperty("unreadsFrom")]
         public DateTime UnreadsFrom { get; set; }
 
-        [JsonProperty(PropertyName = "msgs")]
+        [JsonProperty("msgs")]
         public int Messages { get; set; }
 
-        [JsonProperty(PropertyName = "latest")]
+        [JsonProperty("latest")]
         public DateTime Latest { get; set; }
 
-        [JsonProperty(PropertyName = "userMentions")]
+        [JsonProperty("userMentions")]
         public int UserMentions { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

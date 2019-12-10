@@ -6,64 +6,64 @@ namespace Rocket.Chat.Domain
 {
     public class Integration
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "enabled")]
+        [JsonProperty("enabled")]
         public bool Enabled { get; set; }
 
-        [JsonProperty(PropertyName = "username")]
+        [JsonProperty("username")]
         public string Username { get; set; }
 
-        [JsonProperty(PropertyName = "alias")]
+        [JsonProperty("alias")]
         public string Alias { get; set; }
 
-        [JsonProperty(PropertyName = "avatar")]
+        [JsonProperty("avatar")]
         public string Avatar { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "triggerWords")]
+        [JsonProperty("triggerWords")]
         public IEnumerable<string> TriggerWords { get; set; }
 
-        [JsonProperty(PropertyName = "urls")]
+        [JsonProperty("urls")]
         public IEnumerable<string> Urls { get; set; }
 
-        [JsonProperty(PropertyName = "token")]
+        [JsonProperty("token")]
         public string Token { get; set; }
 
-        [JsonProperty(PropertyName = "script")]
+        [JsonProperty("script")]
         public string Script { get; set; }
 
-        [JsonProperty(PropertyName = "scriptEnabled")]
+        [JsonProperty("scriptEnabled")]
         public bool ScriptEnabled { get; set; }
 
-        [JsonProperty(PropertyName = "impersonateUser")]
+        [JsonProperty("impersonateUser")]
         public bool ImpersonateUser { get; set; }
 
-        [JsonProperty(PropertyName = "scriptCompiled")]
+        [JsonProperty("scriptCompiled")]
         public string ScriptCompiled { get; set; }
 
-        [JsonProperty(PropertyName = "scriptError")]
+        [JsonProperty("scriptError")]
         public string ScriptError { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "userId")]
+        [JsonProperty("userId")]
         public string UserId { get; set; }
 
-        [JsonProperty(PropertyName = "channel")]
+        [JsonProperty("channel")]
         public IEnumerable<Channel> Channel { get; set; }
 
-        [JsonProperty(PropertyName = "_createdAt")]
+        [JsonProperty("_createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "_createdBy")]
+        [JsonProperty("_createdBy")]
         public User CreatedBy { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
     }
 }

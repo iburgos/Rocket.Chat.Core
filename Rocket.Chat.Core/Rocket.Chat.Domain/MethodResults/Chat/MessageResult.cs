@@ -4,10 +4,10 @@ namespace Rocket.Chat.Domain.MethodResults.Chat
 {
     public class MessageResult
     {
-        [JsonProperty(PropertyName = "message")]
+        [JsonProperty("message")]
         public Message Message { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

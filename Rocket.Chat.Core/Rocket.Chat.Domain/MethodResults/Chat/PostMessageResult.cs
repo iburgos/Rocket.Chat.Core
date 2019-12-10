@@ -5,16 +5,16 @@ namespace Rocket.Chat.Domain.MethodResults.Chat
 {
     public class PostMessageResult
     {
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "channel")]
+        [JsonProperty("channel")]
         public string Channel { get; set; }
 
-        [JsonProperty(PropertyName = "message")]
+        [JsonProperty("message")]
         public Message Message { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

@@ -4,10 +4,10 @@ namespace Rocket.Chat.Domain
 {
     public class Email
     {
-        [JsonProperty(PropertyName = "address")]
+        [JsonProperty("address")]
         public string Address { get; set; }
 
-        [JsonProperty(PropertyName = "verified")]
+        [JsonProperty("verified")]
         public bool Verified { get; set; }
     }
 }

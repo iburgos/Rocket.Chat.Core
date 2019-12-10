@@ -5,76 +5,76 @@ namespace Rocket.Chat.Domain
 {
     public class Preference
     {
-        [JsonProperty(PropertyName = "newRoomNotification")]
+        [JsonProperty("newRoomNotification")]
         public string NewRoomNotification { get; set; }
 
-        [JsonProperty(PropertyName = "newMessageNotification")]
+        [JsonProperty("newMessageNotification")]
         public string NewMessageNotification { get; set; }
 
-        [JsonProperty(PropertyName = "muteFocusedConversations")]
+        [JsonProperty("muteFocusedConversations")]
         public bool MuteFocusedConversations { get; set; }
 
-        [JsonProperty(PropertyName = "useEmojis")]
+        [JsonProperty("useEmojis")]
         public bool UseEmojis { get; set; }
 
-        [JsonProperty(PropertyName = "convertAsciiEmoji")]
+        [JsonProperty("convertAsciiEmoji")]
         public bool ConvertAsciiEmoji { get; set; }
 
-        [JsonProperty(PropertyName = "saveMobileBandwidth")]
+        [JsonProperty("saveMobileBandwidth")]
         public bool SaveMobileBandwidth { get; set; }
 
-        [JsonProperty(PropertyName = "collapseMediaByDefault")]
+        [JsonProperty("collapseMediaByDefault")]
         public bool CollapseMediaByDefault { get; set; }
 
-        [JsonProperty(PropertyName = "autoImageLoad")]
+        [JsonProperty("autoImageLoad")]
         public bool AutoImageLoad { get; set; }
 
-        [JsonProperty(PropertyName = "emailNotificationMode")]
+        [JsonProperty("emailNotificationMode")]
         public string EmailNotificationMode { get; set; }
 
-        [JsonProperty(PropertyName = "roomsListExhibitionMode")]
+        [JsonProperty("roomsListExhibitionMode")]
         public string RoomsListExhibitionMode { get; set; }
 
-        [JsonProperty(PropertyName = "unreadAlert")]
+        [JsonProperty("unreadAlert")]
         public bool UnreadAlert { get; set; }
 
-        [JsonProperty(PropertyName = "notificationsSoundVolume")]
+        [JsonProperty("notificationsSoundVolume")]
         public int NotificationsSoundVolume { get; set; }
 
-        [JsonProperty(PropertyName = "desktopNotifications")]
+        [JsonProperty("desktopNotifications")]
         public string DesktopNotifications { get; set; }
 
-        [JsonProperty(PropertyName = "mobileNotifications")]
+        [JsonProperty("mobileNotifications")]
         public string MobileNotifications { get; set; }
 
-        [JsonProperty(PropertyName = "enableAutoAway")]
+        [JsonProperty("enableAutoAway")]
         public bool EnableAutoAway { get; set; }
 
-        [JsonProperty(PropertyName = "highlights")]
+        [JsonProperty("highlights")]
         public IEnumerable<string> Highlights { get; set; }
 
-        [JsonProperty(PropertyName = "desktopNotificationDuration")]
+        [JsonProperty("desktopNotificationDuration")]
         public int DesktopNotificationDuration { get; set; }
 
-        [JsonProperty(PropertyName = "viewMode")]
+        [JsonProperty("viewMode")]
         public int ViewMode { get; set; }
 
-        [JsonProperty(PropertyName = "hideUsernames")]
+        [JsonProperty("hideUsernames")]
         public bool HideUsernames { get; set; }
 
-        [JsonProperty(PropertyName = "hideRoles")]
+        [JsonProperty("hideRoles")]
         public bool HideRoles { get; set; }
 
-        [JsonProperty(PropertyName = "hideAvatars")]
+        [JsonProperty("hideAvatars")]
         public bool HideAvatars { get; set; }
 
-        [JsonProperty(PropertyName = "hideFlexTab")]
+        [JsonProperty("hideFlexTab")]
         public bool HideFlexTab { get; set; }
 
-        [JsonProperty(PropertyName = "sendOnEnter")]
+        [JsonProperty("sendOnEnter")]
         public string SendOnEnter { get; set; }
 
-        [JsonProperty(PropertyName = "roomCounterSidebar")]
+        [JsonProperty("roomCounterSidebar")]
         public bool RoomCounterSidebar { get; set; }
     }
 }

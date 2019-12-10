@@ -5,10 +5,10 @@ namespace Rocket.Chat.Domain
 {
     public class Integrations
     {
-        [JsonProperty(PropertyName = "integrations")]
+        [JsonProperty("integrations")]
         public IEnumerable<Integration> _Integrations { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

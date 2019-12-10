@@ -6,37 +6,37 @@ namespace Rocket.Chat.Domain
 {
     public class Thread
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "rid")]
+        [JsonProperty("rid")]
         public string RoomId { get; set; }
 
-        [JsonProperty(PropertyName = "msg")]
+        [JsonProperty("msg")]
         public string Content { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
-        public User User { get; set; }
+        [JsonProperty("u")]
+        public User Owner { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "mentions")]
+        [JsonProperty("mentions")]
         public IEnumerable<User> Mentions { get; set; }
 
-        [JsonProperty(PropertyName = "channels")]
+        [JsonProperty("channels")]
         public IEnumerable<Channel> Channels { get; set; }
 
-        [JsonProperty(PropertyName = "replies")]
+        [JsonProperty("replies")]
         public IEnumerable<string> Replies { get; set; }
 
-        [JsonProperty(PropertyName = "tcount")]
+        [JsonProperty("tcount")]
         public int TotalCount { get; set; }
 
-        [JsonProperty(PropertyName = "tlm")]
-        public DateTime Tlm { get; set; }
+        [JsonProperty("tlm")]
+        public DateTime LastMessage { get; set; }
     }
 }

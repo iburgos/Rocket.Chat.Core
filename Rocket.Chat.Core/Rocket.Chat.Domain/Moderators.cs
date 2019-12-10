@@ -5,10 +5,10 @@ namespace Rocket.Chat.Domain
 {
     public class Moderators
     {
-        [JsonProperty(PropertyName = "moderators")]
+        [JsonProperty("moderators")]
         public IEnumerable<User> _Moderators { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

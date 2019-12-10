@@ -6,34 +6,34 @@ namespace Rocket.Chat.Domain
 {
     public class Attachment
     {
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonProperty(PropertyName = "title_link")]
+        [JsonProperty("title_link")]
         public string TitleLink { get; set; }
 
-        [JsonProperty(PropertyName = "title_link_download")]
+        [JsonProperty("title_link_download")]
         public bool? TitleLinkDownloadable { get; set; }
 
-        [JsonProperty(PropertyName = "text")]
+        [JsonProperty("text")]
         public string Text { get; set; }
 
-        [JsonProperty(PropertyName = "image_url")]
+        [JsonProperty("image_url")]
         public string ImageUrl { get; set; }
 
-        [JsonProperty(PropertyName = "author_name")]
+        [JsonProperty("author_name")]
         public string AuthorName { get; set; }
 
-        [JsonProperty(PropertyName = "author_icon")]
+        [JsonProperty("author_icon")]
         public string AuthorIcon { get; set; }
 
-        [JsonProperty(PropertyName = "thumb_url")]
+        [JsonProperty("thumb_url")]
         public string ThumbUrl { get; set; }
 
-        [JsonProperty(PropertyName = "color")]
+        [JsonProperty("color")]
         public string Color { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
 
         protected bool Equals(Attachment other)

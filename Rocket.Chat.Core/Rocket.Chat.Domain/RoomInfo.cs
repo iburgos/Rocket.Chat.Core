@@ -1,18 +1,16 @@
-﻿namespace Rocket.Chat.Domain
+﻿using System;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
+
+namespace Rocket.Chat.Domain
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Newtonsoft.Json;
-
-    using Rocket.Chat.Domain.JsonConverters;
-
     public class RoomInfo
     {
         [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty("ts"), JsonConverter(typeof(MeteorDateConverter))]
+        [JsonProperty("ts")]
         public DateTime? Timestamp { get; set; }
 
         [JsonProperty("t")]
@@ -20,7 +18,7 @@
 
         public string Name { get; set; }
 
-        [JsonProperty("lm"), JsonConverter(typeof(MeteorDateConverter))]
+        [JsonProperty("lm")]
         public DateTime? LastMessage { get; set; }
 
         [JsonProperty("msgs")]
@@ -29,7 +27,7 @@
         [JsonProperty("usernames")]
         public IList<string> Usersnames { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
+        [JsonProperty("u")]
         public User Owner { get; set; }
     }
 }

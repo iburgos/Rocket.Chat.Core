@@ -5,13 +5,13 @@ namespace Rocket.Chat.Domain
 {
     public class Token
     {
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "createdAt")]
+        [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "lastTokenPart")]
+        [JsonProperty("lastTokenPart")]
         public string LastTokenPart { get; set; }
     }
 }

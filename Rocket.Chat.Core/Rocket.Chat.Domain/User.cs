@@ -7,43 +7,43 @@ namespace Rocket.Chat.Domain
 {
     public class User
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "username")]
+        [JsonProperty("username")]
         public string Username { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "status")]
+        [JsonProperty("status")]
         public string Status { get; set; }
 
-        [JsonProperty(PropertyName = "utcOffset")]
+        [JsonProperty("utcOffset")]
         public int UtcOffset { get; set; }
 
-        [JsonProperty(PropertyName = "createdAt")]
+        [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "services")]
+        [JsonProperty("services")]
         public Services Services { get; set; }
 
-        [JsonProperty(PropertyName = "emails")]
+        [JsonProperty("emails")]
         public IEnumerable<Email> Emails { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "active")]
+        [JsonProperty("active")]
         public bool Active { get; set; }
 
-        [JsonProperty(PropertyName = "roles")]
+        [JsonProperty("roles")]
         public IEnumerable<string> Roles { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "settings")]
+        [JsonProperty("settings")]
         public Settings Settings { get; set; }
 
         public override string ToString()

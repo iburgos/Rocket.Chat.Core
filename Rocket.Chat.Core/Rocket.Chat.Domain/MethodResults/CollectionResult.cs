@@ -5,7 +5,7 @@ namespace Rocket.Chat.Domain.MethodResults
 {
     public class CollectionResult
     {
-        [JsonProperty(PropertyName = "collection")]
+        [JsonProperty("collection")]
         public string Name { get; set; }
 
         public string Id { get; set; }

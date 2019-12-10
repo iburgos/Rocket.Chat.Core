@@ -6,49 +6,49 @@ namespace Rocket.Chat.Domain.MethodResults.Users
 {
     public class ExportResult
     {
-        [JsonProperty(PropertyName = "requested")]
+        [JsonProperty("requested")]
         public bool Requested { get; set; }
 
-        [JsonProperty(PropertyName = "exportOperation")]
+        [JsonProperty("exportOperation")]
         public ExportData ExportOperation { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 
     public class ExportData
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "createdAt")]
+        [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "userId")]
+        [JsonProperty("userId")]
         public string UserId { get; set; }
 
-        [JsonProperty(PropertyName = "roomList")]
+        [JsonProperty("roomList")]
         public IEnumerable<Room> RoomList { get; set; }
 
-        [JsonProperty(PropertyName = "status")]
+        [JsonProperty("status")]
         public string Status { get; set; }
 
-        [JsonProperty(PropertyName = "exportPath")]
+        [JsonProperty("exportPath")]
         public string ExportPath { get; set; }
 
-        [JsonProperty(PropertyName = "assetsPath")]
+        [JsonProperty("assetsPath")]
         public string AssetsPath { get; set; }
 
-        [JsonProperty(PropertyName = "fileList")]
+        [JsonProperty("fileList")]
         public IEnumerable<string> FileList { get; set; }
 
-        [JsonProperty(PropertyName = "generatedFile")]
+        [JsonProperty("generatedFile")]
         public string GeneratedFile { get; set; }
 
-        [JsonProperty(PropertyName = "fullExport")]
+        [JsonProperty("fullExport")]
         public bool FullExport { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
     }
 }
