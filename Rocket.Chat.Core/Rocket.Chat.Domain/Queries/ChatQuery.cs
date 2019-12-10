@@ -37,7 +37,7 @@ namespace Rocket.Chat.Domain.Queries
             {
                 var queryParams = GetByIdOrName(RoomId, string.Empty);
 
-                queryParams.Add("since", Since.ToString("yyyy-MM-ddTHH:mm:ss.sssZ"));
+                queryParams.Add("since", Since.ToString(QueryHelper.DATE_FORMAT));
 
                 if (Offset.HasValue)
                     queryParams.Add("offset", Offset.Value.ToString());
@@ -162,7 +162,7 @@ namespace Rocket.Chat.Domain.Queries
                 var queryParams = new Dictionary<string, string>();
 
                 queryParams.Add("rid", RoomId);
-                queryParams.Add("updatedSince", UpdatedSince.ToString("yyyy-MM-ddTHH:mm:ss.sssZ"));
+                queryParams.Add("updatedSince", UpdatedSince.ToString(QueryHelper.DATE_FORMAT));
 
                 if (Sort != null)
                     queryParams.Add("sort", Sort.ToQueryString());

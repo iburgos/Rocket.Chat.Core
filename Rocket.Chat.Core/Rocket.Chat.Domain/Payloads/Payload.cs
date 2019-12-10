@@ -245,5 +245,132 @@ namespace Rocket.Chat.Domain.Payloads
             [JsonProperty(PropertyName = "text")]
             public string Text { get; set; }
         }
+
+        public class User : Payload
+        {
+            [JsonProperty(PropertyName = "email")]
+            public string Email { get; set; }
+
+            [JsonProperty(PropertyName = "name")]
+            public string Name { get; set; }
+
+            [JsonProperty(PropertyName = "password")]
+            public string Password { get; set; }
+
+            [JsonProperty(PropertyName = "username")]
+            public string Username { get; set; }
+
+            [JsonProperty(PropertyName = "active")]
+            public bool Active { get; set; }
+
+            [JsonProperty(PropertyName = "roles")]
+            public IEnumerable<string> Roles { get; set; }
+
+            [JsonProperty(PropertyName = "joinDefaultChannels")]
+            public bool JoinDefaultChannels { get; set; }
+
+            [JsonProperty(PropertyName = "requirePasswordChange")]
+            public bool RequirePasswordChange { get; set; }
+
+            [JsonProperty(PropertyName = "sendWelcomeEmail")]
+            public bool SendWelcomeEmail { get; set; }
+
+            [JsonProperty(PropertyName = "verified")]
+            public bool Verified { get; set; }
+
+            [JsonProperty(PropertyName = "customFields")]
+            public string CustomFields { get; set; }
+        }
+
+        public class DeleteOwnAccount : Payload
+        {
+            [JsonProperty(PropertyName = "password")]
+            public string Password { get; set; }
+        }
+
+        public class ForgotPassword : Payload
+        {
+            [JsonProperty(PropertyName = "email")]
+            public string Email { get; set; }
+        }
+
+        public class PersonalAccessToken : Payload
+        {
+            [JsonProperty(PropertyName = "tokenName")]
+            public string TokenName { get; set; }
+        }
+
+        public class RegisterUser : Payload
+        {
+            [JsonProperty(PropertyName = "username")]
+            public string Username { get; set; }
+
+            [JsonProperty(PropertyName = "email")]
+            public string Email { get; set; }
+
+            [JsonProperty(PropertyName = "pass")]
+            public string Password { get; set; }
+
+            [JsonProperty(PropertyName = "name")]
+            public string Name { get; set; }
+
+            [JsonProperty(PropertyName = "secretURL")]
+            public string SecretURL { get; set; }
+        }
+
+        public class SetAvatar : Payload
+        {
+            [JsonProperty(PropertyName = "userId")]
+            public string UserId { get; set; }
+
+            [JsonProperty(PropertyName = "avatarUrl")]
+            public string AvatarUrl { get; set; }
+        }
+
+        public class SetActive : Payload
+        {
+            [JsonProperty(PropertyName = "userId")]
+            public string UserId { get; set; }
+
+            [JsonProperty(PropertyName = "activeStatus")]
+            public bool ActiveStatus { get; set; }
+        }
+
+        public class UpdateUser : Payload
+        {
+            [JsonProperty(PropertyName = "userId")]
+            public string UserId { get; set; }
+
+            [JsonProperty(PropertyName = "data")]
+            public User Data { get; set; }
+        }
+
+        public class UpdateOwnBasicInfo : Payload
+        {
+            [JsonProperty(PropertyName = "data")]
+            public OwnBasicInfo Data { get; set; }
+
+
+            public class OwnBasicInfo
+            {
+                [JsonProperty(PropertyName = "email")]
+                public string Email { get; set; }
+
+                [JsonProperty(PropertyName = "name")]
+                public string Name { get; set; }
+
+                [JsonProperty(PropertyName = "username")]
+                public string Username { get; set; }
+
+                [JsonProperty(PropertyName = "currentPassword")]
+                public string CurrentPassword { get; set; }
+
+                [JsonProperty(PropertyName = "newPassword")]
+                public string NewPassword { get; set; }
+
+                [JsonProperty(PropertyName = "customFields")]
+                public string customFields { get; set; }
+            }
+        }
     }
 }
