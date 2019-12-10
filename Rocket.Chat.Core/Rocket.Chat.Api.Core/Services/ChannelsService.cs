@@ -137,7 +137,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Sets a channel’s custom fields.
         /// </summary>
-        Task<Result<ChannelResult>> SetCustomFields(Payload.CustomFields payload);
+        Task<Result<ChannelResult>> SetCustomFields(Payload.SetCustomFields payload);
         /// <summary>
         /// Sets whether a channel is a default channel or not.
         /// </summary>
@@ -191,21 +191,21 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> AddLeader(string roomId, string userId)
         {
-            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { RoomId = roomId, UserId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addLeader"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddModerator(string roomId, string userId)
         {
-            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { RoomId = roomId, UserId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addModerator"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> AddOwner(string roomId, string userId)
         {
-            var payload = new Payload.UserAction { roomId = roomId, userId = userId };
+            var payload = new Payload.UserAction { RoomId = roomId, UserId = userId };
             var response = await _restClientService.Post<CallResult>(GetUrl("addOwner"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -219,14 +219,14 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Archive(string roomId)
         {
-            var payload = new Payload { roomId = roomId };
+            var payload = new Payload { RoomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("archive"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
 
         public async Task<Result<bool>> Close(string roomId)
         {
-            var payload = new Payload { roomId = roomId };
+            var payload = new Payload { RoomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("close"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -246,7 +246,7 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Delete(string roomId)
         {
-            var payload = new Payload { roomId = roomId };
+            var payload = new Payload { RoomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("delete"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -351,7 +351,7 @@ namespace Rocket.Chat.Api.Core.Services
 
         public async Task<Result<bool>> Open(string roomId)
         {
-            var payload = new Payload { roomId = roomId };
+            var payload = new Payload { RoomId = roomId };
             var response = await _restClientService.Post<CallResult>(GetUrl("open"), payload);
             return ServiceHelper.MapBoolResponse(response);
         }
@@ -380,7 +380,7 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetCustomFields(Payload.CustomFields payload)
+        public async Task<Result<ChannelResult>> SetCustomFields(Payload.SetCustomFields payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setCustomFields"), payload);
             return ServiceHelper.MapResponse(response);
