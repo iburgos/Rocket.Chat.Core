@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Rocket.Chat.Domain;
 using Rocket.Chat.Domain.MethodResults;
 using Rocket.Chat.Domain.MethodResults.Users;
@@ -7,7 +8,7 @@ using Rocket.Chat.Domain.Queries;
 
 namespace Rocket.Chat.Api.Core.Services
 {
-    internal interface IUsersService
+    public interface IUsersService
     {
         /// <summary>
         /// Create a new user.

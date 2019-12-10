@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
     public interface IAuthenticationService
