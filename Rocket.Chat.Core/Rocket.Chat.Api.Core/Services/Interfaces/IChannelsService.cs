@@ -2,7 +2,7 @@
 using Rocket.Chat.Domain.MethodResults.Channels;
 using Rocket.Chat.Domain.Payloads;
 using Rocket.Chat.Domain.Queries;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Rocket.Chat.Api.Core.Services
@@ -12,7 +12,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Adds all of the users on the server to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> AddAll(Payload.AddAll payload);
+        Task<Result<Channel>> AddAll(Payload.AddAll payload);
         /// <summary>
         /// Gives the role of Leader for a user in the current channel.
         /// </summary>
@@ -44,7 +44,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Creates a new channel.
         /// </summary>
-        Task<Result<ChannelResult>> Create(Payload.Create payload);
+        Task<Result<Channel>> Create(Payload.Create payload);
         /// <summary>
         /// Removes a channel.
         /// </summary>
@@ -68,31 +68,31 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Gets a channel’s information.
         /// </summary>
-        Task<Result<ChannelResult>> Info(string roomId);
+        Task<Result<Channel>> Info(string roomId);
         /// <summary>
         /// Adds a user to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Invite(Payload.UserAction payload);
+        Task<Result<Channel>> Invite(Payload.UserAction payload);
         /// <summary>
         /// Joins yourself to a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Join(Payload.Join payload);
+        Task<Result<Channel>> Join(Payload.Join payload);
         /// <summary>
         /// Removes a user from a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Kick(Payload.UserAction payload);
+        Task<Result<Channel>> Kick(Payload.UserAction payload);
         /// <summary>
         /// Removes the calling user from a channel.
         /// </summary>
-        Task<Result<ChannelResult>> Leave(Payload payload);
+        Task<Result<Channel>> Leave(Payload payload);
         /// <summary>
         /// Retrieves all of the channels from the server.
         /// </summary>
-        Task<Result<Channels>> List();
+        Task<Result<IEnumerable<Channel>>> List();
         /// <summary>
         /// Gets only the channels the calling user has joined.
         /// </summary>
-        Task<Result<Channels>> ListJoined();
+        Task<Result<IEnumerable<Channel>>> ListJoined();
         /// <summary>
         /// Retrieves all channel users.
         /// </summary>
@@ -120,7 +120,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Changes a channel’s name.
         /// </summary>
-        Task<Result<ChannelResult>> Rename(Payload.Rename payload);
+        Task<Result<Channel>> Rename(Payload.Rename payload);
         /// <summary>
         /// Gets the user’s roles in the channel.
         /// </summary>
@@ -132,7 +132,7 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Sets a channel’s custom fields.
         /// </summary>
-        Task<Result<ChannelResult>> SetCustomFields(Payload.SetCustomFields payload);
+        Task<Result<Channel>> SetCustomFields(Payload.SetCustomFields payload);
         /// <summary>
         /// Sets whether a channel is a default channel or not.
         /// </summary>
@@ -140,27 +140,27 @@ namespace Rocket.Chat.Api.Core.Services
         /// <summary>
         /// Sets a channel’s description.
         /// </summary>
-        Task<Result<ChannelResult>> SetDescription(Payload.SetDescription payload);
+        Task<Result<Channel>> SetDescription(Payload.SetDescription payload);
         /// <summary>
         /// Sets the channel’s code required to join it.
         /// </summary>
-        Task<Result<ChannelResult>> SetJoinCode(Payload.SetJoinCode payload);
+        Task<Result<Channel>> SetJoinCode(Payload.SetJoinCode payload);
         /// <summary>
         /// Sets a channel’s description.
         /// </summary>
-        Task<Result<ChannelResult>> SetPurpose(Payload.SetPurpose payload);
+        Task<Result<Channel>> SetPurpose(Payload.SetPurpose payload);
         /// <summary>
         /// Sets whether a channel is read only or not.
         /// </summary>
-        Task<Result<ChannelResult>> SetReadOnly(Payload.SetReadOnly payload);
+        Task<Result<Channel>> SetReadOnly(Payload.SetReadOnly payload);
         /// <summary>
         /// Sets a channel’s topic.
         /// </summary>
-        Task<Result<ChannelResult>> SetTopic(Payload.SetTopic payload);
+        Task<Result<Channel>> SetTopic(Payload.SetTopic payload);
         /// <summary>
         /// Sets the type of room the channel should be.
         /// </summary>
-        Task<Result<ChannelResult>> SetType(Payload.SetType payload);
+        Task<Result<Channel>> SetType(Payload.SetType payload);
         /// <summary>
         /// Unarchives a channel.
         /// </summary>

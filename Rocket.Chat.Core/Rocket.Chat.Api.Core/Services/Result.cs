@@ -17,8 +17,10 @@
             Success = true;
             Content = content;
         }
-
-        public Result(string error)
+    }
+    public class ErrorResult<TResult> : Result<TResult>
+    {
+        public ErrorResult(string error)
         {
             Success = false;
             Content = default;

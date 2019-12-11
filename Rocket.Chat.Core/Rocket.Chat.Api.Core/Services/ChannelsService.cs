@@ -6,6 +6,8 @@ using Rocket.Chat.Domain.MethodResults.Channels;
 using Rocket.Chat.Domain.Payloads;
 using Rocket.Chat.Domain.Queries;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -23,10 +25,10 @@ namespace Rocket.Chat.Api.Core.Services
             _restClientService = restClientService;
         }
 
-        public async Task<Result<ChannelResult>> AddAll(Payload.AddAll payload)
+        public async Task<Result<Channel>> AddAll(Payload.AddAll payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("addAll"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
         public async Task<Result<bool>> AddLeader(string roomId, string userId)
@@ -78,10 +80,10 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Create(Payload.Create payload)
+        public async Task<Result<Channel>> Create(Payload.Create payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("create"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
         public async Task<Result<bool>> Delete(string roomId)
@@ -118,47 +120,48 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Info(string roomId)
+        public async Task<Result<Channel>> Info(string roomId)
         {
             var query = new ChannelQuery.Channel { RoomId = roomId };
             string route = $"{GetUrl("info")}{query.ToQueryString()}";
-            return ServiceHelper.MapResponse(await _restClientService.Get<ChannelResult>(route));
+            var response = await _restClientService.Get<ChannelResult>(route);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Invite(Payload.UserAction payload)
+        public async Task<Result<Channel>> Invite(Payload.UserAction payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("invite"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Join(Payload.Join payload)
+        public async Task<Result<Channel>> Join(Payload.Join payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("join"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Kick(Payload.UserAction payload)
+        public async Task<Result<Channel>> Kick(Payload.UserAction payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("kick"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Leave(Payload payload)
+        public async Task<Result<Channel>> Leave(Payload payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("leave"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<Channels>> List()
+        public async Task<Result<IEnumerable<Channel>>> List()
         {
-            var response = await _restClientService.Get<Channels>(GetUrl("list"));
-            return ServiceHelper.MapResponse(response);
+            var response = await _restClientService.Get<ChannelsResult>(GetUrl("list"));
+            return ProcessChannelsResponse(response);
         }
 
-        public async Task<Result<Channels>> ListJoined()
+        public async Task<Result<IEnumerable<Channel>>> ListJoined()
         {
-            var response = await _restClientService.Get<Channels>(GetUrl("list.joined"));
-            return ServiceHelper.MapResponse(response);
+            var response = await _restClientService.Get<ChannelsResult>(GetUrl("list.joined"));
+            return ProcessChannelsResponse(response);
         }
 
         public async Task<Result<Members>> Members(ChannelQuery.Members query)
@@ -202,9 +205,10 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapBoolResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> Rename(Payload.Rename payload)
+        public async Task<Result<Channel>> Rename(Payload.Rename payload)
         {
-            return ServiceHelper.MapResponse(await _restClientService.Post<ChannelResult>(GetUrl("rename"), payload));
+            var response = await _restClientService.Post<ChannelResult>(GetUrl("rename"), payload);
+            return ProcessChannelResponse(response);
         }
 
         public async Task<Result<RolesResult>> Roles(ChannelQuery.Channel query)
@@ -220,54 +224,78 @@ namespace Rocket.Chat.Api.Core.Services
             return ServiceHelper.MapResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetCustomFields(Payload.SetCustomFields payload)
+        public async Task<Result<Channel>> SetCustomFields(Payload.SetCustomFields payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setCustomFields"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
         public void SetDefault() => throw new NotImplementedException();
 
-        public async Task<Result<ChannelResult>> SetDescription(Payload.SetDescription payload)
+        public async Task<Result<Channel>> SetDescription(Payload.SetDescription payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setDescription"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetJoinCode(Payload.SetJoinCode payload)
+        public async Task<Result<Channel>> SetJoinCode(Payload.SetJoinCode payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setJoinCode"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetPurpose(Payload.SetPurpose payload)
+        public async Task<Result<Channel>> SetPurpose(Payload.SetPurpose payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setPurpose"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetReadOnly(Payload.SetReadOnly payload)
+        public async Task<Result<Channel>> SetReadOnly(Payload.SetReadOnly payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setReadOnly"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetTopic(Payload.SetTopic payload)
+        public async Task<Result<Channel>> SetTopic(Payload.SetTopic payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setTopic"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
-        public async Task<Result<ChannelResult>> SetType(Payload.SetType payload)
+        public async Task<Result<Channel>> SetType(Payload.SetType payload)
         {
             var response = await _restClientService.Post<ChannelResult>(GetUrl("setType"), payload);
-            return ServiceHelper.MapResponse(response);
+            return ProcessChannelResponse(response);
         }
 
         public async Task<Result<bool>> Unarchive(Payload payload)
         {
             var response = await _restClientService.Post<CallResult>(GetUrl("unarchive"), payload);
             return ServiceHelper.MapBoolResponse(response);
+        }
+
+        private static Result<IEnumerable<Channel>> ProcessChannelsResponse(ApiResponse<ChannelsResult> response)
+        {
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return response.Result.Success
+                    ? new Result<IEnumerable<Channel>>(response.Result._Channels)
+                    : new ErrorResult<IEnumerable<Channel>>(response.Message);
+            }
+            else
+                return new ErrorResult<IEnumerable<Channel>>(response.Message);
+        }
+
+        private static Result<Channel> ProcessChannelResponse(ApiResponse<ChannelResult> response)
+        {
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return response.Result.Success
+                    ? new Result<Channel>(response.Result.Channel)
+                    : new ErrorResult<Channel>(response.Message);
+            }
+            else
+                return new ErrorResult<Channel>(response.Message);
         }
     }
 }

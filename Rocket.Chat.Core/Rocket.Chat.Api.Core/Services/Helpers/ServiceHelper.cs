@@ -13,7 +13,7 @@ namespace Rocket.Chat.Api.Core.Services.Helpers
             if (response.StatusCode == HttpStatusCode.OK)
                 loginResult = new Result<TResult>(response.Result);
             else
-                loginResult = new Result<TResult>(response.Message);
+                loginResult = new ErrorResult<TResult>(response.Message);
 
             return loginResult;
         }
@@ -23,9 +23,9 @@ namespace Rocket.Chat.Api.Core.Services.Helpers
             Result<bool> loginResult;
 
             if (response.StatusCode == HttpStatusCode.OK)
-                loginResult = response.Result.Success ? new Result<bool>(true) : new Result<bool>(response.Result.Error);
+                loginResult = response.Result.Success ? new Result<bool>(true) : new ErrorResult<bool>(response.Result.Error);
             else
-                loginResult = new Result<bool>(response.Message);
+                loginResult = new ErrorResult<bool>(response.Message);
 
             return loginResult;
         }

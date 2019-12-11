@@ -43,7 +43,7 @@ namespace Rocket.Chat.Api.Core.Services
                 _authHelper.AuthToken = loginData.AuthToken;
             }
             else
-                loginResult = new Result<LoginResult>(response.Message);
+                loginResult = new ErrorResult<LoginResult>(response.Message);
 
             return loginResult;
         }
@@ -77,7 +77,7 @@ namespace Rocket.Chat.Api.Core.Services
                 _authHelper.AuthToken = string.Empty;
             }
             else
-                logoutResult = new Result<LogoutResult>(response.Message);
+                logoutResult = new ErrorResult<LogoutResult>(response.Message);
 
             return logoutResult;
         }

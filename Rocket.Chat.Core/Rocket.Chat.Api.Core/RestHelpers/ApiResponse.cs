@@ -42,6 +42,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
         {
             StatusCode = statusCode;
             ResponseStatus = responseStatus;
+            Message = $"StatusCode = {statusCode} - ResponseStatus = {responseStatus}";
         }
 
         public ApiResponse(string message, string stackTrace)

@@ -2,14 +2,14 @@
 
 using Newtonsoft.Json;
 
-namespace Rocket.Chat.Domain
+namespace Rocket.Chat.Domain.MethodResults.Channels
 {
-    public class Channels
+    public class ChannelsResult
     {
         [JsonProperty("success")]
         public bool Success { get; set; }
 
         [JsonProperty("channels")]
-        public List<Channel> _Channels { get; set; }
+        public IEnumerable<Channel> _Channels { get; set; }
     }
 }
