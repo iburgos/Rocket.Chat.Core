@@ -52,7 +52,7 @@ namespace Console.Test
 
         private static async Task CreateChannel(RocketChat rocketChat)
         {
-            var payload = new Payload.Create { name = "testingChannel" };
+            var payload = new Payload.Create { Name = "testingChannel" };
             await rocketChat.Api.Channels.Create(payload);
         }
 
