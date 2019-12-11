@@ -12,8 +12,6 @@ namespace Rocket.Chat.Api.Core.RestHelpers
         Task<ApiResponse<TResult>> Get<TResult>(string route);
         Task<ApiResponse<TResult>> Put<TResult>(string route, object body);
         Task<ApiResponse<TResult>> Delete<TResult>(string route, object body = null);
-        Task<ApiResponse<byte[]>> GetFile(string route);
-        Task<ApiResponse<byte[]>> GetFile(string route, object body);
     }
 
     public class RestClientService : IRestClientService
@@ -21,16 +19,16 @@ namespace Rocket.Chat.Api.Core.RestHelpers
         public ILogger Logger = Log.Logger;
         private readonly IAuthHelper _authHelper;
         private readonly IRestClient _restClient;
-        private readonly IJsonConvertHelper _jsonConvertHelper;
+        private readonly IJsonSerializer _jsonSerializer;
 
         public RestClientService(
             IAuthHelper authHelper,
             IRestClient restClient,
-            IJsonConvertHelper jsonConvertHelper)
+            IJsonSerializer jsonSerializer)
         {
             _authHelper = authHelper;
             _restClient = restClient;
-            _jsonConvertHelper = jsonConvertHelper;
+            _jsonSerializer = jsonSerializer;
         }
 
         public async Task<ApiResponse<TResult>> Post<TResult>(string route, object body)
@@ -42,7 +40,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -63,7 +61,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -84,7 +82,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -105,7 +103,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
                 IRestResponse response = await _restClient.ExecuteTaskAsync(request);
                 if (response.IsSuccessful)
                 {
-                    var responseContent = _jsonConvertHelper.Deserialize<TResult>(response.Content);
+                    var responseContent = _jsonSerializer.Deserialize<TResult>(response.Content);
                     return new ApiResponse<TResult>(response.StatusCode, responseContent);
                 }
                 return new ApiResponse<TResult>(response.StatusCode, response.ResponseStatus);
@@ -117,43 +115,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
             }
         }
 
-        public async Task<ApiResponse<byte[]>> GetFile(string route)
-        {
-            try
-            {
-                var request = new RestRequest(route, Method.GET);
-                IRestResponse response = await _restClient.ExecuteTaskAsync(request);
-                if (response.IsSuccessful)
-                {
-                    return new ApiResponse<byte[]>(response.StatusCode, response.RawBytes);
-                }
-                return new ApiResponse<byte[]>(response.StatusCode, response.ResponseStatus);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "GetFile GET call to API threw an exception");
-                return new ApiResponse<byte[]>(ex.Message, ex.StackTrace);
-            }
-        }
-
-        public async Task<ApiResponse<byte[]>> GetFile(string route, object body)
-        {
-            try
-            {
-                var request = CreateRequest(route, Method.POST, body);
-                IRestResponse response = await _restClient.ExecuteTaskAsync(request);
-                if (response.IsSuccessful)
-                {
-                    return new ApiResponse<byte[]>(response.StatusCode, response.RawBytes);
-                }
-                return new ApiResponse<byte[]>(response.StatusCode, response.ResponseStatus);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "GetFile POST call to API threw an exception");
-                return new ApiResponse<byte[]>(ex.Message, ex.StackTrace);
-            }
-        }
+        
 
         private RestRequest CreateRequest(string route, Method method, object body = null)
         {
@@ -169,7 +131,7 @@ namespace Rocket.Chat.Api.Core.RestHelpers
 
             if (body != null)
             {
-                request.AddJsonBody(body);
+                request.AddJsonBody(_jsonSerializer.Serialize(body));
             }
 
             return request;

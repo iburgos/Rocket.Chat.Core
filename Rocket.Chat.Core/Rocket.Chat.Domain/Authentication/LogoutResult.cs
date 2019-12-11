@@ -4,16 +4,16 @@ namespace Rocket.Chat.Domain.Authentication
 {
     public class LogoutResult
     {
-        [JsonProperty(PropertyName = "status")]
+        [JsonProperty("status")]
         public LoginStatus Status { get; set; }
 
-        [JsonProperty(PropertyName = "data")]
+        [JsonProperty("data")]
         public LogoutData Data { get; set; }
     }
 
     public class LogoutData
     {
-        [JsonProperty(PropertyName = "message")]
+        [JsonProperty("message")]
         public string Message { get; set; }
     }
 }

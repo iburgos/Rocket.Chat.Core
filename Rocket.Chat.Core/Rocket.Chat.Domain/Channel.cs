@@ -6,52 +6,52 @@
 
     public class Channel
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "fname")]
+        [JsonProperty("fname")]
         public string Fname { get; set; }
 
-        [JsonProperty(PropertyName = "t")]
+        [JsonProperty("t")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "usernames")]
+        [JsonProperty("usernames")]
         public string UserNames { get; set; }
 
-        [JsonProperty(PropertyName = "msgs")]
+        [JsonProperty("msgs")]
         public int Messages { get; set; }
 
-        [JsonProperty(PropertyName = "usersCount")]
+        [JsonProperty("usersCount")]
         public int UsersCount { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
-        public User User { get; set; }
+        [JsonProperty("u")]
+        public User Owner { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "ro")]
-        public bool ro { get; set; }
+        [JsonProperty("ro")]
+        public bool ReadOnly { get; set; }
 
-        [JsonProperty(PropertyName = "sysMes")]
-        public bool sysMes { get; set; }
+        [JsonProperty("sysMes")]
+        public bool SystemMessage { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "broadcast")]
+        [JsonProperty("broadcast")]
         public bool Broadcast { get; set; }
 
-        [JsonProperty(PropertyName = "encrypted")]
+        [JsonProperty("encrypted")]
         public bool Encrypted { get; set; }
 
-        [JsonProperty(PropertyName = "default")]
+        [JsonProperty("default")]
         public bool Default { get; set; }
 
-        [JsonProperty(PropertyName = "joinCodeRequired")]
+        [JsonProperty("joinCodeRequired")]
         public bool JoinCodeRequired { get; set; }
     }
 }

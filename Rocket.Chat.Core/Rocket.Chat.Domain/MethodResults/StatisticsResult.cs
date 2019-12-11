@@ -9,7 +9,7 @@ namespace Rocket.Chat.Domain.MethodResults
 {
     public class StatisticsResult
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
         public string UniqueId { get; set; }
@@ -48,7 +48,7 @@ namespace Rocket.Chat.Domain.MethodResults
 
     public class Migration
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
         public long Version { get; set; }
@@ -68,10 +68,10 @@ namespace Rocket.Chat.Domain.MethodResults
         public double Uptime { get; set; }
         public List<double> Loadavg { get; set; }
 
-        [JsonProperty(PropertyName = "TotalMemory")]
+        [JsonProperty("TotalMemory")]
         public long TotalMemory { get; set; }
 
-        [JsonProperty(PropertyName = "Freemem")]
+        [JsonProperty("Freemem")]
         public long FreeMemory { get; set; }
 
         public List<Cpu> Cpus { get; set; }

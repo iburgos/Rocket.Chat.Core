@@ -1,8 +1,13 @@
-﻿namespace Rocket.Chat.Domain.Requests
+﻿using Newtonsoft.Json;
+
+namespace Rocket.Chat.Domain.Requests
 {
     public class LoginRequest
     {
-        public string user { get; set; }
-        public string password { get; set; }
+        [JsonProperty("user")]
+        public string User { get; set; }
+
+        [JsonProperty("password")]
+        public string Password { get; set; }
     }
 }

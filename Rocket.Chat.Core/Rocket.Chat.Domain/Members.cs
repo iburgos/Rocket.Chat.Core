@@ -5,19 +5,19 @@ namespace Rocket.Chat.Domain
 {
     public class Members
     {
-        [JsonProperty(PropertyName = "members")]
+        [JsonProperty("members")]
         public IEnumerable<Member> _Members { get; set; }
 
-        [JsonProperty(PropertyName = "count")]
+        [JsonProperty("count")]
         public int Count { get; set; }
 
-        [JsonProperty(PropertyName = "offset")]
+        [JsonProperty("offset")]
         public int Offset { get; set; }
 
-        [JsonProperty(PropertyName = "total")]
+        [JsonProperty("total")]
         public int Total { get; set; }
 
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
     }
 }

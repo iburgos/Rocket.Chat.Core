@@ -6,16 +6,16 @@ namespace Rocket.Chat.Domain
 {
     public class Role
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "rid")]
+        [JsonProperty("rid")]
         public string RoomId { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
-        public User User { get; set; }
+        [JsonProperty("u")]
+        public User Owner { get; set; }
 
-        [JsonProperty(PropertyName = "roles")]
+        [JsonProperty("roles")]
         public IEnumerable<string> Roles { get; set; }
     }
 }

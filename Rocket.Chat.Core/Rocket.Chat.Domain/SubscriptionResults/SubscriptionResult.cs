@@ -7,7 +7,7 @@ namespace Rocket.Chat.Domain.SubscriptionResults
 
     public class SubscriptionResult<T>
     {
-        [JsonProperty(PropertyName = "msg")]
+        [JsonProperty("msg")]
         public string ModificationType { get; set; }
 
         public string Collection { get; set; }

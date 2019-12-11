@@ -5,73 +5,73 @@ namespace Rocket.Chat.Domain.Authentication
 {
     public class LoginResult
     {
-        [JsonProperty(PropertyName = "status")]
+        [JsonProperty("status")]
         public LoginStatus Status { get; set; }
 
-        [JsonProperty(PropertyName = "data")]
+        [JsonProperty("data")]
         public LoginData Data { get; set; }
     }
 
     public class LoginData
     {
-        [JsonProperty(PropertyName = "userid")]
+        [JsonProperty("userid")]
         public string UserId { get; set; }
 
-        [JsonProperty(PropertyName = "authToken")]
+        [JsonProperty("authToken")]
         public string AuthToken { get; set; }
 
-        [JsonProperty(PropertyName = "me")]
+        [JsonProperty("me")]
         public Me Me { get; set; }
     }
 
     public class Me
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "services")]
+        [JsonProperty("services")]
         public Services Services { get; set; }
 
-        [JsonProperty(PropertyName = "emails")]
+        [JsonProperty("emails")]
         public IEnumerable<Email> Emails { get; set; }
 
-        [JsonProperty(PropertyName = "status")]
+        [JsonProperty("status")]
         public string Status { get; set; }
 
-        [JsonProperty(PropertyName = "active")]
+        [JsonProperty("active")]
         public bool Active { get; set; }
 
-        [JsonProperty(PropertyName = "roles")]
+        [JsonProperty("roles")]
         public IEnumerable<string> Roles { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "statusConnection")]
+        [JsonProperty("statusConnection")]
         public string StatusConnection { get; set; }
 
-        [JsonProperty(PropertyName = "utcOffset")]
+        [JsonProperty("utcOffset")]
         public int UtcOffset { get; set; }
 
-        [JsonProperty(PropertyName = "username")]
+        [JsonProperty("username")]
         public string Username { get; set; }
 
-        [JsonProperty(PropertyName = "statusDefault")]
+        [JsonProperty("statusDefault")]
         public string StatusDefault { get; set; }
 
-        [JsonProperty(PropertyName = "settings")]
+        [JsonProperty("settings")]
         public Settings Settings { get; set; }
 
-        [JsonProperty(PropertyName = "email")]
+        [JsonProperty("email")]
         public string Email { get; set; }
 
-        [JsonProperty(PropertyName = "avatarUrl")]
+        [JsonProperty("avatarUrl")]
         public string AvatarUrl { get; set; }
     }
 
     public class Settings
     {
-        [JsonProperty(PropertyName = "preferences")]
+        [JsonProperty("preferences")]
         public Preferences Preferences { get; set; }   
     }
 
@@ -82,19 +82,19 @@ namespace Rocket.Chat.Domain.Authentication
 
     public class Services
     {
-        [JsonProperty(PropertyName = "password")]
+        [JsonProperty("password")]
         public Password Password { get; set; }
     }
 
     public class Password
     {
-        [JsonProperty(PropertyName = "bcrypt")]
+        [JsonProperty("bcrypt")]
         public string Bcrypt { get; set; }
     }
 
     public enum LoginStatus
     {
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         Success
     }
 }

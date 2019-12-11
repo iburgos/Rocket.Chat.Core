@@ -6,14 +6,14 @@ namespace Rocket.Chat.Domain.MethodResults
 {
     public class MethodResult<T>
     {
-        [JsonProperty(PropertyName = "msg")]
+        [JsonProperty("msg")]
         public string ResponseType { get; set; }
 
         public string Id { get; set; }
 
         public T Result { get; set; }
 
-        [JsonProperty(PropertyName = "error")]
+        [JsonProperty("error")]
         public ErrorResult Error { get; set; }
 
         public bool HasError => Error != null;
@@ -21,13 +21,13 @@ namespace Rocket.Chat.Domain.MethodResults
 
     public class CallResult
     {
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
 
-        [JsonProperty(PropertyName = "error")]
+        [JsonProperty("error")]
         public string Error { get; set; }
 
-        [JsonProperty(PropertyName = "errorType")]
+        [JsonProperty("errorType")]
         public string ErrorType { get; set; }
     }
 }

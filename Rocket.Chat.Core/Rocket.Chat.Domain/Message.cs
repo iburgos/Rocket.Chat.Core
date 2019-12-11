@@ -19,78 +19,78 @@
             Reactions = new List<Reaction>();
         }
 
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "t")]
+        [JsonProperty("t")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "rid")]
+        [JsonProperty("rid")]
         public string RoomId { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "msg")]
+        [JsonProperty("msg")]
         public string Content { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
-        public User User { get; set; }
+        [JsonProperty("u")]
+        public User Owner { get; set; }
 
-        [JsonProperty(PropertyName = "groupable")]
+        [JsonProperty("groupable")]
         public bool IsGroupable { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "mentions")]
+        [JsonProperty("mentions")]
         public IEnumerable<User> Mentions { get; set; }
 
-        [JsonProperty(PropertyName = "channels")]
+        [JsonProperty("channels")]
         public IEnumerable<Channel> Channels { get; set; }
 
-        [JsonProperty(PropertyName = "attachments"), NotNull]
+        [JsonProperty("attachments"), NotNull]
         public List<Attachment> Attachments { get; set; }
 
-        [JsonProperty(PropertyName = "starred"), NotNull]
+        [JsonProperty("starred"), NotNull]
         public List<User> Starred { get; set; }
 
-        [JsonProperty(PropertyName = "editedBy")]
+        [JsonProperty("editedBy")]
         public User EditedBy { get; set; }
 
-        [JsonProperty(PropertyName = "editedAt")]
+        [JsonProperty("editedAt")]
         public DateTime? EditedAt { get; set; }
 
         [JsonConverter(typeof(RocketReactionConverter))]
         public List<Reaction> Reactions { get; set; }
 
-        [JsonProperty(PropertyName = "urls")]
+        [JsonProperty("urls")]
         public List<Url> Urls { get; set; }
 
-        [JsonProperty(PropertyName = "parseUrls")]
+        [JsonProperty("parseUrls")]
         public bool ParseUrls { get; set; }
 
-        [JsonProperty(PropertyName = "alias")]
+        [JsonProperty("alias")]
         public string Alias { get; set; }
 
-        [JsonProperty(PropertyName = "bot")]
+        [JsonProperty("bot")]
         public Bot Bot { get; set; }
 
-        [JsonProperty(PropertyName = "emoji")]
+        [JsonProperty("emoji")]
         public string Emoji { get; set; }
 
-        [JsonProperty(PropertyName = "avatar")]
+        [JsonProperty("avatar")]
         public string Avatar { get; set; }
 
         //Check this properties
 
-        [JsonProperty(PropertyName = "pinned")]
+        [JsonProperty("pinned")]
         public bool IsPinned { get; set; }
 
-        [JsonProperty(PropertyName = "pinnedAt")]
+        [JsonProperty("pinnedAt")]
         public DateTime? PinnedAt { get; set; }
 
-        [JsonProperty(PropertyName = "pinnedBy")]
+        [JsonProperty("pinnedBy")]
         public User PinnedBy { get; set; }
     }
 }

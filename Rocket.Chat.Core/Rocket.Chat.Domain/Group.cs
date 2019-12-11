@@ -5,31 +5,31 @@ namespace Rocket.Chat.Domain
 {
     public class Group
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "t")]
+        [JsonProperty("t")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "msgs")]
+        [JsonProperty("msgs")]
         public int Messages { get; set; }
 
-        [JsonProperty(PropertyName = "u")]
-        public User User { get; set; }
+        [JsonProperty("u")]
+        public User Owner { get; set; }
 
-        [JsonProperty(PropertyName = "ts")]
+        [JsonProperty("ts")]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty(PropertyName = "ro")]
-        public bool ro { get; set; }
+        [JsonProperty("ro")]
+        public bool ReadOnly { get; set; }
 
-        [JsonProperty(PropertyName = "sysMes")]
-        public bool sysMes { get; set; }
+        [JsonProperty("sysMes")]
+        public bool SystemMessage { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
     }
 }

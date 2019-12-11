@@ -5,61 +5,61 @@ namespace Rocket.Chat.Domain
 {
     public class File
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "size")]
+        [JsonProperty("size")]
         public int Size { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "rid")]
+        [JsonProperty("rid")]
         public string RoomId { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "store")]
+        [JsonProperty("store")]
         public string Store { get; set; }
 
-        [JsonProperty(PropertyName = "complete")]
+        [JsonProperty("complete")]
         public bool Complete { get; set; }
 
-        [JsonProperty(PropertyName = "uploading")]
+        [JsonProperty("uploading")]
         public bool Uploading { get; set; }
 
-        [JsonProperty(PropertyName = "extension")]
+        [JsonProperty("extension")]
         public string Extension { get; set; }
 
-        [JsonProperty(PropertyName = "progress")]
+        [JsonProperty("progress")]
         public int Progress { get; set; }
 
-        [JsonProperty(PropertyName = "user")]
+        [JsonProperty("user")]
         public User User { get; set; }
 
-        [JsonProperty(PropertyName = "_updatedAt")]
+        [JsonProperty("_updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "instanceId")]
+        [JsonProperty("instanceId")]
         public string InstanceId { get; set; }
 
-        [JsonProperty(PropertyName = "etag")]
+        [JsonProperty("etag")]
         public string Etag { get; set; }
 
-        [JsonProperty(PropertyName = "path")]
+        [JsonProperty("path")]
         public string Path { get; set; }
 
-        [JsonProperty(PropertyName = "token")]
+        [JsonProperty("token")]
         public string Token { get; set; }
 
-        [JsonProperty(PropertyName = "uploadedAt")]
+        [JsonProperty("uploadedAt")]
         public DateTime UploadedAt { get; set; }
 
-        [JsonProperty(PropertyName = "url")]
+        [JsonProperty("url")]
         public string Url { get; set; }
     }
 }

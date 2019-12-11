@@ -9,16 +9,6 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("Rocket.Chat.Api.Core.SimpleInjector")]
 namespace Rocket.Chat.Api.Core.Services
 {
-    public interface IAuthenticationService
-    {
-        Task<Result<LoginResult>> Login(string user, string password);
-        void LoginGoogle();
-        void LoginFacebook();
-        void LoginTwitter();
-        Task<Result<LogoutResult>> Logout();
-        void Me();
-    }
-
     internal class AuthenticationService: IAuthenticationService
     {
         private readonly IAuthHelper _authHelper;
@@ -36,8 +26,8 @@ namespace Rocket.Chat.Api.Core.Services
         {
             var loginRequest = new LoginRequest
             {
-                user = user,
-                password = password
+                User = user,
+                Password = password
             };
 
             ApiResponse<LoginResult> response = await _restClientService.Post<LoginResult>(ApiHelper.GetUrl("login"), loginRequest);
