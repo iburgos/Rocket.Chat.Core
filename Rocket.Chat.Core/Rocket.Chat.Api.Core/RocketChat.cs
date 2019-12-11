@@ -14,6 +14,7 @@ namespace Rocket.Chat.Api.Core
             IJsonSerializer jsonSerializer = new JsonSerializer();
             IAuthHelper authHelper = new AuthHelper();
             IRestClientService restClientService = new RestClientService(authHelper, restClient, jsonSerializer);
+            IFileRestClientService fileRestClientService = new FileRestClientService(authHelper, restClient, jsonSerializer);
             IAuthenticationService authService = new AuthenticationService(authHelper, restClientService);
             IChannelsService channelsService = new ChannelsService(restClientService);
             IGroupsService groupsService = new GroupsService(restClientService);
@@ -23,6 +24,7 @@ namespace Rocket.Chat.Api.Core
             IAssetsService assetsService = new AssetsService(restClientService);
             IAutoTranslateService autoTranslateService = new AutoTranslateService(restClientService);
             ICommandsService commandsService = new CommandsService(restClientService);
+            IEmojisService emojisService = new EmojisService(restClientService, fileRestClientService);
 
             Api = new RocketChatApi(
                 chatService,
@@ -33,7 +35,8 @@ namespace Rocket.Chat.Api.Core
                 roomService,
                 assetsService,
                 autoTranslateService,
-                commandsService);
+                commandsService,
+                emojisService);
         }       
     }
 }

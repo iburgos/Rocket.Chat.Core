@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Rocket.Chat.Domain
 {
@@ -25,5 +26,11 @@ namespace Rocket.Chat.Domain
 
         [JsonProperty("default")]
         public bool Default { get; set; }
+
+        [JsonProperty("extension")]
+        public string Extension { get; set; }
+
+        [JsonProperty("aliases")]
+        public IEnumerable<string> Aliases { get; set; }
     }
 }

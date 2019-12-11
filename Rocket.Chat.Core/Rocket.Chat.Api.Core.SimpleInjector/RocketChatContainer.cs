@@ -32,6 +32,7 @@ namespace Rocket.Chat.Api.Core.SimpleInjector
         private void RegisterServices()
         {
             _container.Register<IRestClientService, RestClientService>();
+            _container.Register<IFileRestClientService, FileRestClientService>();
             _container.Register<IAuthenticationService, AuthenticationService>();
             _container.Register<IChannelsService, ChannelsService>();
             _container.Register<IGroupsService, GroupsService>();
@@ -41,6 +42,7 @@ namespace Rocket.Chat.Api.Core.SimpleInjector
             _container.Register<IAssetsService, AssetsService>();
             _container.Register<IAutoTranslateService, AutoTranslateService>();
             _container.Register<ICommandsService, CommandsService>();
+            _container.Register<IEmojisService, EmojisService>();
         }
 
         public void Dispose()

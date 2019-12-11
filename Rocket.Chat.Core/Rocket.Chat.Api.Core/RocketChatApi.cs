@@ -15,6 +15,7 @@ namespace Rocket.Chat.Api.Core
         IAssetsService AssetsService { get; }
         IAutoTranslateService AutoTranslateService { get; }
         ICommandsService CommandsService { get; }
+        IEmojisService EmojisService { get; }
     }
 
     internal class RocketChatApi : IRocketChatApi
@@ -28,7 +29,8 @@ namespace Rocket.Chat.Api.Core
             IRoomService roomService,
             IAssetsService assetsService,
             IAutoTranslateService autoTranslateService,
-            ICommandsService commandsService)
+            ICommandsService commandsService,
+            IEmojisService emojisService)
         {
             Chat = chatService;
             Users = usersService;
@@ -39,6 +41,7 @@ namespace Rocket.Chat.Api.Core
             AssetsService = assetsService;
             AutoTranslateService = autoTranslateService;
             CommandsService = commandsService;
+            EmojisService = emojisService;
         }
 
         public IChatService Chat { get; }
@@ -50,5 +53,6 @@ namespace Rocket.Chat.Api.Core
         public IAssetsService AssetsService { get; }
         public IAutoTranslateService AutoTranslateService { get; }
         public ICommandsService CommandsService { get; }
+        public IEmojisService EmojisService { get; }
     }
 }

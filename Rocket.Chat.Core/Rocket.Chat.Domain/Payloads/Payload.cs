@@ -506,5 +506,38 @@ namespace Rocket.Chat.Domain.Payloads
             public string ThreadMessageId { get; set; }
 
         }
+
+        public class CreateEmoji : Payload
+        {
+            [JsonProperty("emoji")]
+            public byte[] Emoji { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("aliases")]
+            public string Aliases { get; set; }
+        }
+
+        public class UpdateEmoji : Payload
+        {
+            [JsonProperty("_id")]
+            public string Id { get; set; }
+
+            [JsonProperty("emoji")]
+            public byte[] Emoji { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("aliases")]
+            public string Aliases { get; set; }
+        }
+
+        public class DeleteEmoji : Payload
+        {
+            [JsonProperty("emojiId")]
+            public string EmojiId { get; set; }
+        }
     }
 }
