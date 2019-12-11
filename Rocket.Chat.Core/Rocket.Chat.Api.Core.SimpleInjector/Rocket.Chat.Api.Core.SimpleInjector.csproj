@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
-    <Authors>Ignacio Burgos</Authors>
+    <Authors>Nacho</Authors>
     <Copyright />
     <Description>Rocket.Chat.Api.Core wrapper for SimpleInjector use</Description>
     <NeutralLanguage>en</NeutralLanguage>
